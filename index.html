@@ -38,9 +38,9 @@
 			</article>
 			<!--Building-->
 			<article id="builds">
-				<h2 class="major">BUILDING</h2>
+				<h2 class="major">BUILDS</h2>
 				<span class="image main"><img src="images/2.jpg" alt="" /></span>
-				<p>What I've been up to:</p>
+				<p>A couple projects and instructions to follow along:</p>
 				<ul>
 					<li><a href="#css">CSS</a></li>
 					<li><a href="#html">HTML</a></li>
@@ -87,15 +87,45 @@
 			<article id="html">
 				<h2 class="major">HTML</h2>
 				<section>
-					<p>In the 1980s, researchers at CERN were working with thousands of complex documents that all referenced each other.  Employee and computer scientist Tim Berners-Lee proposed a system reliant on hypertext - links that allowed you to move through the network of academic papers with ease.  The next iteration of his idea was Hypertext Markup Language (HTML), which would go on to become the structural backbone of the World Wide Web and modern internet.</p>
-					<p>HTML was designed to be simplistic, as Berners-Lee hoped the formatting would be adopted by non-technical users.  The layout is almost essay-like, with header introducing basic information about the site, body containing the bulk of the page content, and footer leaving off with closing information and signatures.  To understand it better, let’s make one of our own:</p>
-					<p>Computer code is just text.  Even images are just written as links, in text.  That means that when the time comes to write your own code, you can just do it in any text editor.  If you’re using Windows, you can just right-click anywhere on the desktop and an option comes up for a new text file.</p>
+					<p>In the 1980s, researchers at CERN were working with thousands of complex documents that all referenced each other.  One employee, computer scientist Tim Berners-Lee, proposed a system built off hypertext - links that allow you to navigate a network of different pages with ease.  He later built off this idea to create Hypertext Markup Language (HTML), the structural backbone of the modern internet.</p>
+					<p>HTML was designed to be easy for non-technical users to understand, so the layout is essay-like.  It starts with a <b>header</b> to introduce basic information about the site, <b>body</b> containing the bulk of the page content, and <b>footer</b> to leave the reader with closing information and signatures.  To understand better, let’s make a site of our own.</p>
+					<p>Like all computer code, HTML for your website is just text.  Even pictures are just links written as text.  That means you don’t need anything fancy to get started writing your code, just do it in any text editor.  If you’re using Windows, you can right-click anywhere on the desktop to bring up an option for a new text file.</p>
 					<span class="image main"><img src="images/html1.png" alt="" /></span>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
-					<p></p>
+					<p>Let's copy in some code, and go line by line to understand what it's doing:</p>
+					<pre><code>&lt;!DOCTYPE HTML&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;Your First Website&lt;/title&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Welcome to Websites!&lt;/h1&gt;
+    &lt;p&gt;A place to experiment with HTML features.&lt;/p&gt;
+  &lt;/header&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;All killer no filler.&lt;/p&gt;
+&lt;/body&gt;
+&lt;footer&gt;
+  &lt;footer id="contact"&gt;
+  &lt;h2&gt;Contact Us&lt;/h2&gt;
+  &lt;p&gt;&lt;a href="mailto:info@yoursite.com"&gt;Email&lt;/a&gt;!&lt;/p&gt;
+&lt;/footer&gt;
+&lt;/html&gt;		</code></pre>
+					<p>When you create any kind of computer file, the first thing you do is identify what type of file it is so the computer knows what to expect for the rest of the document.  In this case, we lead off by declaring it an HTML file.</p>
+					<p>Next up is the &lt;header&gt; section, where we set the size of the window by making it one size minus another (extrapolate).  We'll also set the title of the page, and add a header section with a title and opening sentence.</p>
+					<p>From there we'll move into the &lt;body&gt; section.</p>
+					<p>Adding sections with section IDs</p>
+					<pre><code>&lt;section id="about"&gt;
+  &lt;h2&gt;Breaking Things Into Sections&lt;/h2&gt;
+    &lt;p&gt;Sections separate parts of the site.&lt;/p&gt;
+    &lt;img src="https://via.placeholder.com/150"&gt;
+&lt;/section&gt;
+&lt;section id="features"&gt;
+  &lt;h2&gt;Other Features&lt;/h2&gt;
+    &lt;h3&gt;Headings&lt;/h3&gt;
+    &lt;p&gt;Using font size to define sections.&lt;/p&gt;
+    &lt;p&gt;&lt;a href="www.any.com" target="_blank"&gt;any.com&lt;/a&gt;&lt;/p&gt
+&lt;/section&gt;	</code></pre>
+					<p>Adding sections with section IDs</p>
 					<p>The <a href="html.html">final product</a>.</p>
 			</article>
 			<!--- CSS --->
