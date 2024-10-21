@@ -87,11 +87,11 @@
 			<article id="html">
 				<h2 class="major">HTML</h2>
 				<section>
-					<p>In the 1980s, researchers at CERN were working with thousands of complex documents that all referenced each other.  One employee, computer scientist Tim Berners-Lee, proposed a system built off hypertext - links that allow you to navigate a network of different pages with ease.  He later built off this idea to create Hypertext Markup Language (HTML), the structural backbone of the modern internet.</p>
-					<p>HTML was designed to be easy for non-technical users to understand, so the layout is essay-like.  It starts with a <b>header</b> to introduce basic information about the site, <b>body</b> containing the bulk of the page content, and <b>footer</b> to leave the reader with closing information and signatures.  To understand better, let’s make a site of our own.</p>
+					<p>In the 1980s, researchers at CERN were working with thousands of complex documents that all referenced each other - think an early Wikipedia.  One employee, computer scientist Tim Berners-Lee, proposed a system built off hypertext - links that allow you to navigate a network of different pages with ease.  He later built off this idea to create Hypertext Markup Language (HTML), the structural backbone of the modern internet.</p>
+					<p>HTML was designed to be easy for non-technical users to understand, so the layout is essay-like.  It starts with a to introduce basic information about the site, &lt;body&gt; containing the bulk of the page content, and &lt;footer&gt; to leave the reader with closing information and signatures.  To understand better, let’s make a site of our own.</p>
 					<p>Like all computer code, HTML for your website is just text.  Even pictures are just links written as text.  That means you don’t need anything fancy to get started writing your code, just do it in any text editor.  If you’re using Windows, you can right-click anywhere on the desktop to bring up an option for a new text file.</p>
 					<span class="image main"><img src="images/html1.png" alt="" /></span>
-					<p>Let's copy in some code, and go line by line to understand what it's doing:</p>
+					<p>Let's copy in some code, and lead off by introducing it as an HTML file:</p>
 					<pre><code>&lt;!DOCTYPE HTML&gt;
 &lt;html&gt;
 &lt;head&gt;
@@ -102,7 +102,8 @@
   &lt;/header&gt;
 &lt;/head&gt;
 &lt;body&gt;
-&lt;p&gt;All killer no filler.&lt;/p&gt;
+  &lt;p&gt;All killer no filler.&lt;/p&gt;
+  &lt;p&gt;A second example!&lt;/p&gt;
 &lt;/body&gt;
 &lt;footer&gt;
   &lt;footer id="contact"&gt;
@@ -110,9 +111,8 @@
   &lt;p&gt;&lt;a href="mailto:info@yoursite.com"&gt;Email&lt;/a&gt;!&lt;/p&gt;
 &lt;/footer&gt;
 &lt;/html&gt;		</code></pre>
-					<p>When you create any kind of computer file, the first thing you do is identify what type of file it is so the computer knows what to expect for the rest of the document.  In this case, we lead off by declaring it an HTML file.</p>
-					<p>Next up is the &lt;header&gt; section, where we set the size of the window by making it one size minus another (extrapolate).  We'll also set the title of the page, and add a header section with a title and opening sentence.</p>
-					<p>From there we'll move into the &lt;body&gt; section.</p>
+					<p>First up is the &lt;header&gt; section, where we set the title of the site and use an &lt;h1&gt; tag to make nice big introduction text.  Notice how we include a &lt;/head&gt; tag to close out this section before moving on to the next.</p>
+					<p>After closing the header, we're free to open up the main content of the site with a &lt;body&gt; section.  This part is punctuated by "paragraph" tags that separate ideas.  Once we're out of ideas, we close out the section with &lt;/body&gt.  Last part is a simple &lt;footer&gt; where we can include some contact information in case anyone falls in love with our minimalist web design.  Once the entire document is done, we close it out with one final &lt;/html&gt; to indicate the end of our file.</p>
 					<p>Adding sections with section IDs</p>
 					<pre><code>&lt;section id="about"&gt;
   &lt;h2&gt;Breaking Things Into Sections&lt;/h2&gt;
@@ -125,7 +125,8 @@
     &lt;p&gt;Using font size to define sections.&lt;/p&gt;
     &lt;p&gt;&lt;a href="www.any.com" target="_blank"&gt;any.com&lt;/a&gt;&lt;/p&gt
 &lt;/section&gt;	</code></pre>
-					<p>Adding sections with section IDs</p>
+					<p>The website we've made is brutally simplistic, but modern websites are only 3 steps beyond that.  Stick with me and we'll learn each step, one at a time.</p>
+					<p></p>
 					<p>The <a href="html.html">final product</a>.</p>
 			</article>
 			<!--- CSS --->
