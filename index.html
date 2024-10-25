@@ -128,7 +128,7 @@
     &lt;li&gt;&lt;a href="#contact">Contact&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
-					<p>This navigation bar helps users get around your site a little more easily.  Links that use the # symbol will navigate around the page the user is currently on, whereas links written with the entire URL will move you to a new site when you click on them.  To give us something to navigate to, let's set up a table in the &lt;/body&gt;:</p>
+					<p>This navigation bar helps users get around your site a little more easily.  Links that use the "#"" symbol will navigate around the page the user is currently on, whereas links written with the entire URL will move you to a new site when you click on them.  To give us something to navigate to, let's set up a table in the &lt;/body&gt;:</p>
 					<pre><code>&lt;section id="tables"&gt;
 &lt;h2&gt;Learning Tables!&lt;/h2&gt;
 &lt;table border="1"&gt;
@@ -158,9 +158,8 @@
     &lt;td&gt;$70,000&lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
-&lt;/section&gt;
-&lt;/nav&gt;</code></pre>					  
-					<p>Now we're using &lt;section&gt;, a transitional piece that can segue us into more advanced tools.  For now, it functions exactly as it sounds, a predefined container holding data.  In the future, we'll use these sections to define formatting more directly, turning sections into dynamic, colourful features of your site.</p>
+&lt;/section&gt;</code></pre>					  
+					<p>That &lt;section&gt; tag we lead off is crucial to getting our navbar to actually navigate.  By matching up the #link from before to the stated section id, we can now hop around the page with precision and give a bit better user experience.  In the future, defining things by section unlocks specific formatting for specific sections, allowing a lot more freedom to create dynamic buttons and other features without having that styling bleed out into the rest of the site.</p>
 					<p>Lastly we'll take a look at the footer.  Some websites use this as another opportunity for a navigation bar, but I try to avoid redundancy and favour a more minimalistic design.  Maybe you can tell by the default font.  Instead, let's add in some more robust contact information, with links to social media and a direct email link.</p>
 					<pre><code>&lt;footer&gt;
 &lt;a href="youraccount@yoursocial.com">Say hi&lt;/a&gt;!
