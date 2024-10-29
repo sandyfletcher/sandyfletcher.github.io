@@ -131,11 +131,11 @@
     &lt;li&gt;&lt;a href="#contact">Contact&lt;/a&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;</code></pre>
-					<p>This navigation bar helps users get around your site a little more easily.  This is also our first look at the hyperlinks we've heard so much about.  These ones use the # symbol, which are used to navigate within that same page.  When it's time to link to a different site elsewhere on the internet, we'll format the links a little differently. We've set up three places to navigate to, but at the moment those places don't actually exist and the map we've written leads to a dead end.  To fix this, let's head to the &lt;body&gt; and set up a table:</p>
+					<p>This navigation bar helps users get around your site a little more easily, and it's also our first look at the hyperlinks we've heard so much about.  These ones use the # symbol, which are used to navigate within that same page.  When it's time to link to a different site elsewhere on the internet, we'll format the links a little differently. We've set up three places to navigate to, but at the moment those places don't actually exist and the map we've written leads to a dead end.  To fix this, let's head to the &lt;body&gt; and set up a table:</p>
 					<pre><code>&lt;section id="tables"&gt;
 &lt;h2&gt;Learning Tables!&lt;/h2&gt;
 &lt;table border="1"&gt;
-&lt;caption&gt;&lt;Employee Information&gt;&lt;/caption&gt;
+&lt;caption&gt;Employee Information&lt;/caption&gt;
   &lt;tr&gt;
      &lt;th&gt;Name&lt;/th&gt;
      &lt;th&gt;Position&lt;/th&gt;
@@ -163,9 +163,10 @@
 &lt;/table&gt;
 &lt;/section&gt;</code></pre>					  
 					<p>That &lt;section&gt; tag we lead off is crucial to getting our navbar to actually navigate.  By matching up the #link from before to the section id, we can hop around the page with precision and grant a better user experience.  When we add style elements in the future, defining these unique sections unlocks powerful formatting tools, allowing a lot more freedom to create dynamic features without having that styling bleed out into the rest of the site.</p>
+					<p>As for the table itself, we'll declare it with a &lt;table&gt; tag, and I've gotten fancy by giving it a small border to separate each cell.</p>
 					<p>Lastly we'll take a look at the footer.  Some websites use this as another opportunity for a navigation bar, but I try to avoid redundancy and favour a more minimalistic design.  Maybe you can tell by the default font.  Instead, let's add in some more robust contact information, with links to social media and a direct email link.</p>
 					<pre><code>&lt;footer&gt;
-&lt;a href="youraccount@yoursocial.com">Say hi&lt;/a&gt;!
+  &lt;a href="youraccount@yoursocial.com">Say hi&lt;/a&gt;!
 &lt;/footer&gt;		</code></pre>
 					<p>The way links work makes them take a lot of space, but the concept is pretty simple.  Think of &lt;a href&gt; as "a ref", a reference to another chunk of text - never forget that's all this ever is, chunks of formatted text linking to other chunks of formatted text.  That's what makes everything load so quickly; our website is only a few kilobytes in size.</p>
 					<p>Despite that minimalism, our website is admittedly a little ugly.  Before we go any further, let's think about what we'd add if we could.  A touch of colour would go a long way, and maybe a nicer font.  Maybe things would light up when we hover over them, maybe we have a dark mode so the website doesn't blind you at night.  These improvements will require adding new programming languages to our repertoire, but don't be intimidated - all we need is to dip our toe into new features, using only the parts we need to execute on our ideas.</p>
