@@ -97,7 +97,7 @@
   &lt;title&gt;_______'s Website&lt;/title&gt;
   &lt;header&gt;
     &lt;h1&gt;Welcome to Websites!&lt;/h1&gt;
-    &lt;h2&gt;A place to experiment with HTML features.&lt;/h2&gt;
+    &lt;p&gt;A place to experiment with HTML features.&lt;/p&gt;
 	&lt;hr&gt;
   &lt;/header&gt;
 &lt;/head&gt;
@@ -114,12 +114,13 @@
 &lt;/body&gt;
 &lt;footer&gt;
   &lt;p&gt;(placeholder for contact info)&lt;/p&gt;
-  &lt;p&gt;&amp;copy;Best Pagemakers International &amp;#169;&lt;/p&gt;
+  &lt;p&gt;&amp;copy;Best Pagemakers International&amp;#169;&lt;/p&gt;
 &lt;/footer&gt;
 &lt;/html&gt;		</code></pre>
 					<p>The first thing any code needs to do is declare its filetype.  By introducing an HTML file, we can ensure that every browser on the planet knows what to expect and how to display our content.  That flexibility is important, since our planet is populated with different devices displaying different screen sizes using different programs.  Expect to introduce more lines of code designed for compatibility as we move forward.</p>
-					<p>Once we have the computer speaking our language, we hit 'em with the introduction, AKA &lt;header&gt;.  As alluded to, this area will hold more style definition later on, but for now we can use it to give our website a title in web browsers and get a declaration out there about the nature of the site and what it's here to do.  Seems silly when it's just us messing around, but big-name companies use the header section to optimize search results and drive millions of users towards their sites over competitors.  It's worth getting right!</p>
-					<p>To show off the "paragraph" tag I threw in a line with &lt;p&gt; before closing out the section with &lt;/head&gt;.  From there we open the main content of the site with &lt;body&gt;  and show off how we can use font sizes to separate ideas.  When we run out of ideas, don't forget to close out the section with &lt;/body&gt;.  Last part is a simple &lt;footer&gt; where we can include some contact information in case anyone falls in love with our minimalist web design.  With the whole thing done, we finalize everything with &lt;/html&gt;.</p>
+					<p>Once we have the computer speaking our language, we hit 'em with the introduction, or &lt;header&gt;.  In the future, we'll use this area to define our style, like fonts and colours, but for now we can use it to give our website a title in web browsers and get a declaration out there about the nature of our site and what it's here to do.  Seems silly when it's just us messing around, but big-name companies use the header section to optimize search results and drive millions of users towards their sites over competitors.  It's worth getting right!</p>
+					<p>HTML comes with some built-in styling through modifying the way text is written.  We can use &lt;h1&gt; is a true header, and the &lt;p&gt; denotes a paragraph, the same way you're reading them right now.  Once we've written our fill, we'll throw in a dividing line with &lt;hr&gt; and finalize the entire section by closing out with a &lt;/head&gt; tag.  For this programming language, it's important to make it clear when you've reached the end of a section, whereas other languages might indicate this with particular symbols like ) or ;</p>
+					<p>From there we open the main content of the site with &lt;body&gt;  and show off how we can use font sizes to separate ideas.  When we run out of ideas, don't forget to close out the section with &lt;/body&gt;.  Last part is a simple &lt;footer&gt; where we can include some contact information in case anyone falls in love with our minimalist web design.  With the whole thing done, we finalize everything with &lt;/html&gt;.</p>
 					<p>Now that we have the code written into the text editor, save the file on your Desktop and right-click to rename the file.  Text files and HTML files aren't so different, so you can just switch out the suffix from "txt" to "html".  You might get a message that you're making things unstable, but that's the nature of experimentation and everyone will survive.  Now when you open the file, it won't be an editable text file, it'll be a website in your browser!</p>
 					<p>If you want to make any changes, simply switch the filetype back to ".txt" and swap out any info you'd like - it's your site!  When you're ready, we'll add another chunk of code to the header section to create a navigation bar:</p>
 					<pre><code>&lt;nav&gt;
