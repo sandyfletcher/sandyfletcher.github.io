@@ -1,199 +1,37 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Sandy Fletcher</title>
-		<link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<header id="header">
-				<div class="logo">
-					<span class="icon fa-user"></span>
-				</div>
-				<div class="content">
-					<div class="inner">
-						<h1>SANDY FLETCHER</h1>
-						<h3>BUILDING WEBSITES</h3>
-					</div>
-				</div>
-				<nav>
-					<ul>
-						<li><a href="#about">ABOUT</a></li>
-						<li><a href="#builds">BUILDS</a></li>
-						<li><a href="#contact">CONTACT</a></li>
-					</ul>
-				</nav>
-			</header>
-			<div id="main">
-			<!--About-->
-			<article id="about">
-				<h2 class="major">ABOUT</h2>
-				<span class="image main"><img src="images/about.png" alt="cup and saucer lookout" /></span>
-				<p>I'm getting better at making websites, both for fun in personal projects and for money on behalf of companies.  Check out previous projects <a href="#builds">here</a>, and <a href="#contact">reach out</a> if you want to collaborate on the next one.</p>
-			</article>
-			<!--Builds-->
-			<article id="builds">
-				<h2 class="major">BUILDS</h2>
-				<span class="image main"><img src="images/build.png" alt="" /></span>
-				<p>A couple projects and instructions to follow along:</p>
-				<ul>
-					<li><a href="#html">HTML</a></li>
-					<li><a href="#css">CSS</a></li>
-				</ul>
-			</article>
-			<!--Contact-->
-			<article id="contact">
-				<h2 class="major">CONTACT</h2>
-				<ul class="icons">
-					<li><a href="https://github.com/sandyfletcher" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-				</ul>
-				<form action="https://api.web3forms.com/submit" method="POST">
-					<input type="hidden" name="access_key" value="c5a7499c-72b7-42b0-ad0d-55e8bd5af782">
-					<input type="hidden" name="redirect" value="https://sandyfletcher.ca/#thanks">
-					<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-					<div class="fields">
-						<div class="field half">
-							<label for="name">Name</label>
-							<input type="text" name="name" id="name" required/>
-						</div>
-						<div class="field half">
-							<label for="email">Email</label>
-							<input type="email" name="email" id="email" required/>
-						</div>
-						<div class="field">
-							<label for="message">Message</label>
-							<textarea name="message" id="message" required rows="4"></textarea>
-						</div>
-					</div>
-					<ul class="actions">
-						<li><input type="submit" value="Send Message" class="primary"/></li>
-						<li><input type="reset" value="Reset"/></li>
-					</ul>
-				</form>
-			</article>
-			<!-- Thanks -->
-			<article id="thanks">
-				<h2 class="major">Thanks for reaching out!</h2>
-				<span class="image main"><img src="images/2.jpg" alt="" /></span>
-				<p>I'll get back to you as soon as I can.</p>
-			</article>
-			<!--- HTML --->
-			<article id="html">
-				<h2 class="major">HTML</h2>
-				<section>
-					<p>In the 1980s, researchers at CERN were working with thousands of complex documents that all referenced each other - think early Wikipedia.  Employee/Computer Scientist Tim Berners-Lee proposed a system built off hypertext - links that create and navigate a vast network of unique pages.  He later built off this idea to create Hypertext Markup Language (HTML), the structural backbone of the modern internet.</p>
-					<p>HTML was designed for non-technical users to understand, so the layout is reminiscent of an essay:  It starts with a &lt;header&gt; to introduce basic information about the site, the &lt;body&gt; to contain the bulk of the page content, and closing with a &lt;footer&gt; to leave the reader with signatures and closing information.  To get a better understanding, let's get our hands dirty and make a site of our own.</p>
-					<span class="image main"><img src="images/html1.png" alt="Desktop/New/Text Document" /></span>
-					<p>All computer code is written text, and HTML is no exception.  All those videos you watch and pictures you see boil down to a basic text link eventually.  That means you don’t need anything fancy to get started writing your code, just anywhere you can write some basic text.  If you’re a Windows person, right-click anywhere on the Desktop to create a new text file.</p>
-					<p>I've prepared some code for you to copy into that file.  Make sure you swap your name into the header so it displays properly.</p>
-					<pre><code>&lt;!DOCTYPE HTML&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;_______'s Website&lt;/title&gt;
-  &lt;header&gt;
-    &lt;h1&gt;Welcome to Websites!&lt;/h1&gt;
-    &lt;p&gt;A place to experiment with HTML features.&lt;/p&gt;
-    &lt;hr&gt;
-  &lt;/header&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;b&gt;&lt;i&gt;Change basic styling and size for text.&lt;/i&gt;&lt;/b&gt;
-  &lt;/br&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;h1&gt;FALLING&lt;/h1&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;h2&gt;DOWN&lt;/h2&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;h3&gt;A TALL&lt;/h3&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;h4&gt;WELL&lt;/h4&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;h5&gt;(splash)&lt;/h5&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/body&gt;
-&lt;footer&gt;
-  &lt;p&gt;(placeholder for contact info)&lt;/p&gt;
-  &lt;p&gt;&amp;copy;Best Pagemakers International&amp;#169;&lt;/p&gt;
-&lt;/footer&gt;
-&lt;/html&gt;		</code></pre>
-					<p>The first thing any code needs to do is declare its filetype.  By introducing an HTML file, we can ensure that every browser on the planet knows what to expect and how to display our content.  That flexibility is important, since our planet is populated with different devices displaying different screen sizes using different programs.  Expect to introduce more lines of code designed for compatibility as we move forward.</p>
-					<p>Once we have the computer speaking our language, we hit 'em with the introduction, or &lt;header&gt;.  In the future, we'll use this area to define our style, like fonts and colours, but for now we can use it to give our website a title and get a declaration out there about the nature of our site and what it's here to do.  Seems silly when it's just us messing around, but big-name companies use the header section to optimize search results and drive millions of users towards their sites over competitors.  It's worth getting right!</p>
-					<p>HTML comes with some built-in styling through modifying the way text is written.  We can use &lt;h1&gt; as a true header, while the &lt;p&gt; denotes a paragraph, just as you're reading them right now.  Once we've written our fill, we'll throw in a dividing line with &lt;hr&gt; and finalize the entire section by closing out with a &lt;/head&gt; tag.  For this programming language, it's important to make it clear when you've reached the end of a section, whereas other languages might indicate this with particular symbols like } or ;</p>
-					<p>We'll open the main content of the site with &lt;body&gt; and use the list function to show off the range of built-in font sizes.  When we've landed at the bottom safely, we can end the list, end the body section, and move on to the footer.  We've included a place to hold our contact information in case anyone falls in love with our minimalist web design, and to make sure no one runs off with it, I've demonstrated two different ways to generate symbols in HTML.  With every chunk of the site filled out, we end the document with one final &lt;/html&gt;.</p>
-					<span class="image main"><img src="images/html2.png" alt="Right-Click/Rename"/></span>
-					<p>With a full website written in our text editor, save that file on your Desktop, then right-click on it to rename the file.  Text files and HTML files aren't all that different, so you can just switch out the suffix from "txt" to "html" to perform the conversion.  You might get a message that you're making things unstable, but that's the nature of experimentation and everyone will survive.  Now when you open the file, it won't be the editable text file you're used to, it'll be a website in your browser!</p>
-					<p>It might not be the most exciting website, but it's all yours.  Feel free to make any changes you want - simply switch the filetype back to ".txt" and start swapping things around.  When you're ready, we'll add another chunk of code to the header section to create a navigation bar:</p>
-					<pre><code>&lt;nav&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href="#home">Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#tables">Tables&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#contact">Contact&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav&gt;</code></pre>
-					<p>This navigation bar helps users get around your site a little more easily, and it's also our first look at the hyperlinks we've heard so much about.  These ones use the # symbol, which are used to navigate within that same page.  When it's time to link to a different site elsewhere on the internet, we'll format the links a little differently. We've set up three places to navigate to, but at the moment those places don't actually exist and the map we've written leads to a dead end.  To fix this, let's head to the &lt;body&gt; and set up a table:</p>
-					<pre><code>&lt;section id="tables"&gt;
-&lt;h2&gt;Learning Tables!&lt;/h2&gt;
-&lt;table border="1"&gt;
-&lt;caption&gt;Employee Information&lt;/caption&gt;
-  &lt;tr&gt;
-     &lt;th&gt;Name&lt;/th&gt;
-     &lt;th&gt;Position&lt;/th&gt;
-    &lt;th&gt;Department&lt;/th&gt;
-    &lt;th&gt;Salary&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Alice Johnson&lt;/td&gt;
-    &lt;td&gt;Software Engineer&lt;/td&gt;
-    &lt;td&gt;Development&lt;/td&gt;
-    &lt;td&gt;$80,000&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Bob Smith&lt;/td&gt;
-    &lt;td&gt;Project Manager&lt;/td&gt;
-    &lt;td&gt;Management&lt;/td&gt;
-    &lt;td&gt;$90,000&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;Charlie Brown&lt;/td&gt;
-    &lt;td&gt;Data Analyst&lt;/td&gt;
-    &lt;td&gt;Analytics&lt;/td&gt;
-    &lt;td&gt;$70,000&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-&lt;/section&gt;</code></pre>					  
-					<p>That &lt;section&gt; tag we lead off with is crucial to getting our navbar to actually navigate.  By matching up the #link from before to the section id, we can hop around the page with precision and grant a better user experience.  When we add style elements in the future, defining these unique sections unlocks powerful formatting tools, allowing a lot more freedom to create dynamic features without having that styling bleed out into the rest of the site.</p>
-					<p>As for the table itself, we'll declare it with a &lt;table&gt; tag, and I've gotten fancy by giving it a small border to separate each cell.  Next up is the &lt;caption&gt;, which is really more of a title for the table, but if you remember all the way back to the fourth line of code we wrote, we already used "title" and now we've gotta go digging for second choices so we don't confuse the computer.  When it's time to fill in the table data, we'll use the tricks we learned from making lists to set each row up one at a time.  As always, don't forget to close out both &lt;/table&gt; and &lt;/section&gt;.</p>
-					<pre><code>&lt;footer&gt;
-  &lt;a href="mailto:someone@example.com"&gt;Send email&lt;/a&gt;
-  &lt;a href="https://www.w3schools.com/"&gt;Visit W3Schools.com!&lt;/a&gt;
-  &lt;a href="youraccount@yoursocial.com"&gt;Say hi&lt;/a&gt;!
-&lt;/footer&gt;		</code></pre>
-					<p>Lastly we'll take a look at the footer.  Some websites use this as another opportunity for a navigation bar, but let's avoid redundancy and instead add more robust contact information.  The email functionality is built right in, and linking to social media will give us a chance to practise external links.  They're arranged mostly the same as before, with the differentiation being that instead of #contact, you'll write out the entire URL.  When they say &lt;a href&gt;, think "a ref" - a reference to another chunk of text, which is all websites ever are.</p>
-					<p>If you had to scroll to the side to see the entire codeblock, you're realizing that the way links are written makes them take up a whole lotta space.  It might seem like a lot of writing, but the way it's done leads to tiny, tiny filesizes.  That's what makes everything load so quickly; our website is only a few kilobytes in size.</p>
-					<p>Despite that minimalism, our website is admittedly a little ugly.  Before we go any further, let's think about what we'd add if we could.  A touch of colour would go a long way, and maybe a nicer font.  Maybe things would light up when we hover over them, maybe we have a dark mode so the website doesn't blind you at night.  These improvements will require adding new programming languages to our repertoire, but don't be intimidated - all we need is to dip our toe into new features, using only the parts we need to execute on our ideas.</p>
-					<p>You can check out the next step in our journey, <a href="#css">Cascading Style Sheets</a>, or check out a <a href="https://html.sandyfletcher.ca">sample website</a> I've made using exclusively HTML to showcase the features in a practical way.  Bake some cookies to celebrate your progress!</p>
-			</article>
-			<!--- CSS --->
-			<article id="css">
-				<h2 class="major">CSS</h2>
-				<section>
-					<span class="image main"><img src="images/pic03.jpg" alt="" /></span>
-					<p>Gimme a second!  Still writing this articlie about how CSS works, improving on the basic website we wrote in the HTML section, and what styling we can do with the new tech.</p>
-			</article>
-		</div>
-			<!-- Footer -->
-			<footer id="footer">
-				<p class="copyright">&copy; 2024</p>
-			</footer>
-		</div>
-		<!-- BG -->
-		<div id="bg"></div>
-		<!-- Scripts -->
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandy Fletcher</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <main class="content">
+            <div class="content-wrapper">
+                <div class="name-section">
+                    <h1>Sandy Fletcher</h1>
+                </div>
+                <nav class="nav-letters">
+                    <a href="/about" class="letter-link"><div class="word-container">about</div></a>
+                    <a href="/building" class="letter-link"><div class="word-container">building</div></a>
+                    <a href="/contact" class="letter-link"><div class="word-container">contact</div></a>
+                </nav>
+            </div>
+        </main>
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <a href="https://sandyfletcher.ca" class="icon-link" title="Home"><img src="assets/images/home.svg" alt="Home" class="icon-image"/></a>
+                <a href="https://html.sandyfletcher.ca" class="icon-link" title="Recipes"><img src="assets/images/home.svg" alt="HTML" class="icon-image"/></a>
+                <a href="https://css.sandyfletcher.ca" class="icon-link" title="CSS/STABLE"><img src="assets/images/home.svg" alt="CSS/STABLE" class="icon-image"/></a>
+                <a href="https://js.sandyfletcher.ca" class="icon-link" title="JS/?"><img src="assets/images/home.svg" alt="JS/?" class="icon-image"/></a>
+                <a href="https://internationalbassstation.github.io" class="icon-link" title="International Bass Station"><img src="assets/images/ibs.ico" alt="International Bass Station" class="icon-image"/></a>
+                <a href="https://qrgnrtr.sandyfletcher.ca" class="icon-link" title="QRGNRTR"><img src="assets/images/qrgnrtr.ico" alt="QRGNRTR" class="icon-image"/></a>
+                <a href="https://situational.sandyfletcher.ca" class="icon-link" title="SSS"><img src="assets/images/sss.ico" alt="Situational Space " class="icon-image"/></a>
+                <a href="https://situational.sandyfletcher.ca" class="icon-link" title="SSS"><img src="assets/images/sss.ico" alt="Situational Space " class="icon-image"/></a>
+            </div>
+        </aside>
+    </div>
+</body>
 </html>
-
