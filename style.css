@@ -59,7 +59,7 @@ body {
     color: #fff;
     text-decoration: none;
     font-size: 1.5rem;
-    width: 200px;
+    width: 200px; /* Provides space for the word to expand */
     height: 3rem;
     position: relative;
     user-select: none;
@@ -69,16 +69,40 @@ body {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    transition: all 0.5s ease;
-    overflow: hidden;
-    width: 1ch;
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Animate only specified properties */
     opacity: 0.7;
+    display: flex; /* Align initial letter and rest of word horizontally */
+    align-items: baseline; /* Good for aligning text parts */
+    /* REMOVED: overflow: hidden; */
+    /* REMOVED: width: 1ch; */
+    /* Width will be determined by its content */
 }
+
+.letter-initial {
+    display: inline-block; /* Ensures it behaves predictably as a flex item */
+    /* No specific styling needed here for the effect itself. */
+}
+
+.letter-rest {
+    display: inline-block; /* Needed for max-width and overflow to work */
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent the rest of the word from wrapping */
+    transition: max-width 0.5s ease, opacity 0.3s ease 0.1s; /* Staggered transition */
+}
+
 .letter-link:hover .word-container {
     transform: translateY(-50%) translateX(2rem) scale(1.2);
-    width: 100%;
+    opacity: 1;
+    /* REMOVED: width: 100%; */
+}
+
+.letter-link:hover .letter-rest {
+    max-width: 15ch; /* Expand to show the rest. Adjust if needed for longer words. */
     opacity: 1;
 }
+
 .sidebar {
     width: 80px;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
@@ -442,11 +466,13 @@ body {
         padding-left: 0;
     }
     .letter-link {
-        width: 100px;
+        width: 100px; /* Reduced width for parent link on mobile */
         height: 4rem;
     }
     .letter-link:hover .word-container {
+        /* Mobile hover transform remains, expanding "in-place" more */
         transform: translateY(1rem) translateX(0) scale(1.2);
+        /* .letter-rest will still expand its max-width due to its own hover rule */
     }
     .about-content,
     .project-content {
