@@ -9,61 +9,59 @@
 <body>
     <div class="container">
         <main class="content">
-            <div class="content-wrapper contact-content">
-                <header class="page-header">
-                    <h1>Contact</h1>
-                </header>
-                
-                <section class="contact-section">
+            <header class="page-header">
+                <h1>Contact</h1>
+            </header>
+            <div class="page-content-container contact-content-styles">
+                <section class="contact-section"> <!-- This class can stay for potential specific styling or JS hooks -->
                     <p class="contact-intro">Have a question or want to collaborate? I'd love to hear from you.</p>
-                    
-                    <div class="contact-grid">
-                        <div class="contact-form-container">
-                            <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
-                                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
-                                <input type="hidden" name="redirect" value="https://sandyfletcher.ca/contact/thanks">
-                                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                                
-                                <div class="form-grid">
-                                    <div class="form-group">
-                                        <label for="name">Name</label>
-                                        <input type="text" name="name" id="name" required />
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input type="email" name="email" id="email" required />
-                                    </div>
+            <div class="contact-grid">
+                    <div class="contact-form-container">
+                        <form action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY"> <!-- Replace with your actual key -->
+                            <input type="hidden" name="redirect" value="https://sandyfletcher.ca/contact/thanks">
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" id="name" required />
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="message">Message</label>
-                                    <textarea name="message" id="message" rows="6" required></textarea>
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" required />
                                 </div>
-                                
-                                <div class="form-actions">
-                                    <button type="submit" class="button button-primary">Send Message</button>
-                                    <button type="reset" class="button button-secondary">Reset</button>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <div class="contact-links">
-                            <h2>Other Ways to Connect</h2>
-                            <div class="social-links">
-                                <a href="https://github.com/sandyfletcher" class="social-link">
-                                    <i class="fas fa-github"></i>
-                                    <span>GitHub</span>
-                                </a>
-                                <!-- Add other social links as needed -->
                             </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea name="message" id="message" rows="6" required></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="button button-primary">Send Message</button>
+                                <button type="reset" class="button button-secondary">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-links">
+                        <h2>Other Ways to Connect</h2>
+                        <div class="social-links">
+                            <a href="https://github.com/sandyfletcher" class="social-link">
+                                <i class="fas fa-github"></i> <!-- Make sure FontAwesome is linked if you use this -->
+                                <span>GitHub</span>
+                            </a>
+                            <!-- Add other social links as needed -->
                         </div>
                     </div>
-                </section>
-            </div>
-        </main>
-        <div id="sidebar-placeholder"></div>
-    </div>
-    <script src="../js/main.js" defer></script>
+                </div>
+            </section>
+        </div>
+    </main>
+    <div id="sidebar-placeholder"></div>
+</div>
+<script src="../js/main.js" defer></script>
 </body>
 </html>
