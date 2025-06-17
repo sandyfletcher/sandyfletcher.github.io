@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Sandy - HTML</title>
+    <title>HTML</title>
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -25,7 +25,6 @@
                 </section>
 
                 <section class="project-details">
-                    <h2>The Challenge</h2>
                     <p>Something made with love is bursting at the seams.  Super Mario ran into a memory constraint with the NES cartridge it was designed for, but rather than ship fewer levels the designers got creative and reused assets.  You never noticed the clouds are the same exact shape as the trees, but you noticed that there are 8 entire worlds to explore.
 
                         You will encounter this fork in the road repeatedly with computers.</p>
@@ -62,6 +61,110 @@ function example() {
                         <li>Feature two explanation</li>
                         <li>Feature three explanation</li>
                     </ul>
+
+                    In the 1980s, researchers at CERN were working with thousands of complex documents that all referenced each other - think early Wikipedia. Employee/Computer Scientist Tim Berners-Lee proposed a system built off hypertext - links that create and navigate a vast network of unique pages. He later built off this idea to create Hypertext Markup Language (HTML), the structural backbone of the modern internet.
+
+HTML was designed for non-technical users to understand, so the layout is reminiscent of an essay: It starts with a <header> to introduce basic information about the site, the <body> to contain the bulk of the page content, and closing with a <footer> to leave the reader with signatures and closing information. To get a better understanding, let's get our hands dirty and make a site of our own.
+
+Desktop/New/Text Document
+All computer code is written text, and HTML is no exception. All those videos you watch and pictures you see boil down to a basic text link eventually. That means you don’t need anything fancy to get started writing your code, just anywhere you can write some basic text. If you’re a Windows person, right-click anywhere on the Desktop to create a new text file.
+
+I've prepared some code for you to copy into that file. Make sure you swap your name into the header so it displays properly.
+
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>_______'s Website</title>
+  <header>
+    <h1>Welcome to Websites!</h1>
+    <p>A place to experiment with HTML features.</p>
+    <hr>
+  </header>
+</head>
+<body>
+  <b><i>Change basic styling and size for text.</i></b>
+  </br>
+  <ul>
+    <li><h1>FALLING</h1></li>
+    <li><h2>DOWN</h2></li>
+    <li><h3>A TALL</h3></li>
+    <li><h4>WELL</h4></li>
+    <li><h5>(splash)</h5></li>
+  </ul>
+</body>
+<footer>
+  <p>(placeholder for contact info)</p>
+  <p>&copy;Best Pagemakers International&#169;</p>
+</footer>
+</html>		
+The first thing any code needs to do is declare its filetype. By introducing an HTML file, we can ensure that every browser on the planet knows what to expect and how to display our content. That flexibility is important, since our planet is populated with different devices displaying different screen sizes using different programs. Expect to introduce more lines of code designed for compatibility as we move forward.
+
+Once we have the computer speaking our language, we hit 'em with the introduction, or <header>. In the future, we'll use this area to define our style, like fonts and colours, but for now we can use it to give our website a title and get a declaration out there about the nature of our site and what it's here to do. Seems silly when it's just us messing around, but big-name companies use the header section to optimize search results and drive millions of users towards their sites over competitors. It's worth getting right!
+
+HTML comes with some built-in styling through modifying the way text is written. We can use <h1> as a true header, while the <p> denotes a paragraph, just as you're reading them right now. Once we've written our fill, we'll throw in a dividing line with <hr> and finalize the entire section by closing out with a </head> tag. For this programming language, it's important to make it clear when you've reached the end of a section, whereas other languages might indicate this with particular symbols like } or ;
+
+We'll open the main content of the site with <body> and use the list function to show off the range of built-in font sizes. When we've landed at the bottom safely, we can end the list, end the body section, and move on to the footer. We've included a place to hold our contact information in case anyone falls in love with our minimalist web design, and to make sure no one runs off with it, I've demonstrated two different ways to generate symbols in HTML. With every chunk of the site filled out, we end the document with one final </html>.
+
+Right-Click/Rename
+With a full website written in our text editor, save that file on your Desktop, then right-click on it to rename the file. Text files and HTML files aren't all that different, so you can just switch out the suffix from "txt" to "html" to perform the conversion. You might get a message that you're making things unstable, but that's the nature of experimentation and everyone will survive. Now when you open the file, it won't be the editable text file you're used to, it'll be a website in your browser!
+
+It might not be the most exciting website, but it's all yours. Feel free to make any changes you want - simply switch the filetype back to ".txt" and start swapping things around. When you're ready, we'll add another chunk of code to the header section to create a navigation bar:
+
+<nav>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#tables">Tables</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+This navigation bar helps users get around your site a little more easily, and it's also our first look at the hyperlinks we've heard so much about. These ones use the # symbol, which are used to navigate within that same page. When it's time to link to a different site elsewhere on the internet, we'll format the links a little differently. We've set up three places to navigate to, but at the moment those places don't actually exist and the map we've written leads to a dead end. To fix this, let's head to the <body> and set up a table:
+
+<section id="tables">
+<h2>Learning Tables!</h2>
+<table border="1">
+<caption>Employee Information</caption>
+  <tr>
+     <th>Name</th>
+     <th>Position</th>
+    <th>Department</th>
+    <th>Salary</th>
+  </tr>
+  <tr>
+    <td>Alice Johnson</td>
+    <td>Software Engineer</td>
+    <td>Development</td>
+    <td>$80,000</td>
+  </tr>
+  <tr>
+    <td>Bob Smith</td>
+    <td>Project Manager</td>
+    <td>Management</td>
+    <td>$90,000</td>
+  </tr>
+  <tr>
+    <td>Charlie Brown</td>
+    <td>Data Analyst</td>
+    <td>Analytics</td>
+    <td>$70,000</td>
+  </tr>
+</table>
+</section>
+That <section> tag we lead off with is crucial to getting our navbar to actually navigate. By matching up the #link from before to the section id, we can hop around the page with precision and grant a better user experience. When we add style elements in the future, defining these unique sections unlocks powerful formatting tools, allowing a lot more freedom to create dynamic features without having that styling bleed out into the rest of the site.
+
+As for the table itself, we'll declare it with a <table> tag, and I've gotten fancy by giving it a small border to separate each cell. Next up is the <caption>, which is really more of a title for the table, but if you remember all the way back to the fourth line of code we wrote, we already used "title" and now we've gotta go digging for second choices so we don't confuse the computer. When it's time to fill in the table data, we'll use the tricks we learned from making lists to set each row up one at a time. As always, don't forget to close out both </table> and </section>.
+
+<footer>
+  <a href="mailto:someone@example.com">Send email</a>
+  <a href="https://www.w3schools.com/">Visit W3Schools.com!</a>
+  <a href="youraccount@yoursocial.com">Say hi</a>!
+</footer>		
+Lastly we'll take a look at the footer. Some websites use this as another opportunity for a navigation bar, but let's avoid redundancy and instead add more robust contact information. The email functionality is built right in, and linking to social media will give us a chance to practise external links. They're arranged mostly the same as before, with the differentiation being that instead of #contact, you'll write out the entire URL. When they say <a href>, think "a ref" - a reference to another chunk of text, which is all websites ever are.
+
+If you had to scroll to the side to see the entire codeblock, you're realizing that the way links are written makes them take up a whole lotta space. It might seem like a lot of writing, but the way it's done leads to tiny, tiny filesizes. That's what makes everything load so quickly; our website is only a few kilobytes in size.
+
+Despite that minimalism, our website is admittedly a little ugly. Before we go any further, let's think about what we'd add if we could. A touch of colour would go a long way, and maybe a nicer font. Maybe things would light up when we hover over them, maybe we have a dark mode so the website doesn't blind you at night. These improvements will require adding new programming languages to our repertoire, but don't be intimidated - all we need is to dip our toe into new features, using only the parts we need to execute on our ideas.
+
+You can check out the next step in our journey, Cascading Style Sheets, or check out a sample website I've made using exclusively HTML to showcase the features in a practical way. Bake some cookies to celebrate your progress!
                 </section>
 
                 <footer class="project-footer">

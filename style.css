@@ -21,7 +21,6 @@ body {
     font-family: 'SpecialElite', sans-serif;
     height: 100vh;
     overflow-x: hidden;
-    line-height: 1.6;
 }
 .container {
     display: flex;
@@ -32,22 +31,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding: 2%;
 }
 .content-wrapper {
     width: 100%;
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    gap: 8rem;
-    margin-top: -8rem;
+    gap: 3rem;
 }
 .name-section {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 4vw, 3rem);
     font-family: 'RubikScribble', sans-serif;
     letter-spacing: -0.02em;
-    opacity: 0.9;
 }
 .nav-letters {
     display: flex;
