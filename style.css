@@ -448,8 +448,37 @@ body {
         transform: translateY(0);
     }
 }
-@media (max-width: 520px) {
+@media (max-width: 600px) {
     .name-section {
         white-space: normal; 
+    }
+    .nav-letters {
+        padding-left: 1.5rem;
+        gap: 1rem;
+    }
+    .letter-link {
+        font-size: 1.3rem;
+    }
+    .word-container {
+        opacity: 1;
+        transform: translateY(-50%);
+        transition: none;
+    }
+    .letter-rest {
+        max-width: 15ch;
+        opacity: 1;
+        overflow: visible;
+        white-space: nowrap;
+        transition: none;
+    }
+    .letter-link:hover .word-container,
+    .letter-link:focus .word-container {
+        transform: translateY(-50%);
+        opacity: 1;
+    }
+    .letter-link:hover .letter-rest,
+    .letter-link:focus .letter-rest {
+        max-width: 15ch;
+        opacity: 1;
     }
 }
