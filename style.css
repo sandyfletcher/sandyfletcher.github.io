@@ -28,9 +28,9 @@ body {
     display: flex;
 }
 .container {
+    min-height: 100%;
     display: flex;
     flex: 1;
-    min-height: 100vh;
 }
 .content {
     height: 100%;
