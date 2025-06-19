@@ -1,3 +1,4 @@
+/* imports */
 @font-face { font-family: 'Codystar'; src: url('assets/fonts/Codystar.ttf') format('truetype'); font-display: block}
 @font-face { font-family: 'Cookie'; src: url('assets/fonts/Cookie.ttf') format('truetype'); font-display: block}
 @font-face { font-family: 'Frijole'; src: url('assets/fonts/Frijole.ttf') format('truetype'); font-display: block}
@@ -6,7 +7,6 @@
 @font-face { font-family: 'RubikScribble'; src: url('assets/fonts/RubikScribble.ttf') format('truetype'); font-display: block}
 @font-face { font-family: 'SpecialElite'; src: url('assets/fonts/SpecialElite.ttf') format('truetype'); font-display: block}
 @font-face { font-family: 'Rubik_Iso'; src: url('assets/fonts/RubikIso-Regular.ttf') format('truetype'); font-display: block}
-
 /* landing page */
 *,
 *::before,
@@ -33,6 +33,7 @@ body {
     min-height: 100vh;
 }
 .content {
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -41,7 +42,7 @@ body {
     padding: 4rem clamp(1.5rem, 5vw, 4rem) 2rem;
     overflow-y: auto;
 }
-.content-wrapper {
+.landing-content {
     width: 100%;
     margin: auto;
     display: flex;
@@ -106,16 +107,16 @@ body {
 }
 /* sidebar */
 .sidebar {
+    height: 100%;
     width: 4.5rem;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
     backdrop-filter: blur(10px);
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 .sidebar-content {
-    height: 100vh;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
     align-items: center;
     padding: 1rem 0;
     gap: 1rem;
@@ -479,6 +480,9 @@ body {
     }
 }
 @media (orientation: landscape) and (max-height: 480px) {
+    .content {
+        height: 100dvh;
+    }
     .landing-text-block {
         gap: 1rem;
     }
