@@ -481,7 +481,6 @@ body {
 }
 @media (orientation: landscape) and (max-height: 480px) {
     .content {
-        height: 100dvh;
         padding: 1rem 1rem;
     }
     .landing-text-block {
@@ -491,11 +490,10 @@ body {
         font-size: clamp(1.1rem, 6vmin, 2rem);
     }
     .nav-letters {
-        padding-left: 1.5rem;
+        width: 100%;
         gap: 0;
         justify-content: space-between;
         height: clamp(7rem, 22vh, 10rem);
-        width: 100%;
     }
     .nav-letters .letter-link {
         font-size: clamp(0.85rem, 4vmin, 1.2rem);
