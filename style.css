@@ -143,6 +143,7 @@ body {
 .content {
     height: 100%;
     width: 100%;
+    min-width: 0;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -206,16 +207,84 @@ body {
     text-decoration-color: rgba(255,255,255,0.7);
 }
 /* about */
-.about-section {
-    flex-grow: 1; /* These sections will fill the grown .page-content */
+.bio-selector-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically center children */
+    align-items: center;
+    width: 100%;
+    /* margin-top: 8vh;  <-- REMOVED: This was the problem */
+    padding: 2rem 0;
     animation: fadeIn 0.8s ease-out;
 }
-.about-section p {
-    padding-left: 5%;
-    margin-bottom: 4%;
+
+/* NEW: Styles for the introductory text */
+.bio-intro-text {
+    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
+    line-height: 1.6;
+    text-align: center;
+    max-width: 650px; /* Keeps line length readable */
+    opacity: 0.8;
+    margin-bottom: 2.5rem; /* Creates space between the text and the buttons */
+}
+
+.bio-choices {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    max-width: 800px;
+}
+.bio-choice {
+    flex: 1;
+    min-width: 150px;
+    padding: 1rem 1.5rem;
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.bio-choice:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+.bio-choice.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.desktop-text { display: inline; }
+.mobile-text { display: none; }
+
+.bio-output {
+    width: 100%;
+    max-width: 800px;
+    min-height: 150px; 
+    padding: 0 5%;
+    transition: opacity 0.15s ease-in-out;
+}
+.bio-output.is-changing {
+    opacity: 0;
+}
+.bio-output p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 1rem;
+}
+.bio-output a {
+    color: #8ab4f8; 
+}
+.bio-output a:hover {
+    color: #a7c5f9;
 }
 /* building */
 .projects-grid {
@@ -594,4 +663,11 @@ body {
     .form-grid {
         grid-template-columns: 1fr;
     }
+    .bio-choices {
+    flex-direction: column; /* Stack the buttons */
+    align-items: stretch; /* Make buttons full width of container */
+    gap: 0.75rem;
+    }
+    .desktop-text { display: none; } /* Hide desktop text */
+    .mobile-text { display: inline; } /* Show mobile text */
 }

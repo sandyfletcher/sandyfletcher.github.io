@@ -14,11 +14,29 @@
                 <div class="header-underline"></div>
             </header>
             <div class="page-content">
-                <section class="about-section">
-                    <p>I'm Sandy, and I got into programming a few months ago.  I use this domain to house some unpolished prototypes that have resulted from the hobby.</p>
-                    <p>The sidebar has a couple things to play around with, and each has a corresponding breakdown in the <a href="/building/">Building</a> section explaining how it came to fruition.</p>
-                    <p>If you're looking for information about something more specific, please <a href="/contact/">reach out</a> directly.</p>
-                </section>
+                <div class="bio-selector-container">
+                    <!-- NEW: Introductory text -->
+                    <p class="bio-intro-text">
+                        I have a tendency to misunderstand how long I'm expected to speak for. I'll let you choose for yourself:
+                    </p>
+                    <div class="bio-choices">
+                        <button class="bio-choice" data-bio="minimalist">
+                            <span class="desktop-text">Minimalist</span>
+                            <span class="mobile-text">Short</span>
+                        </button>
+                        <button class="bio-choice" data-bio="elevator">
+                            <span class="desktop-text">Elevator Pitch</span>
+                            <span class="mobile-text">Medium</span>
+                        </button>
+                        <button class="bio-choice" data-bio="campfire">
+                            <span class="desktop-text">Campfire Bonding</span>
+                            <span class="mobile-text">Long</span>
+                        </button>
+                    </div>
+                    <div id="bio-output" class="bio-output">
+                        <!-- Bio content will be injected here by JavaScript -->
+                    </div>
+                </div>
             </div>
         </main>
         <div id="sidebar-placeholder"></div>
