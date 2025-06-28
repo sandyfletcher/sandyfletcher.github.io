@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const bioOutput = document.getElementById('bio-output');
 
         const bioContent = {
-            minimalist: `<p>I'm a quick learner and good at explaining things.  I enjoy building anything with any material..</p>`,
+            minimalist: `<p>I recently got into making websites.</p><p>Click the little icons over there →</p>`,
             elevator: `<p>I'm skilled at conveying complex information in a digestable manner, which means I'm able to pass anything I know along with ease to any captive audience.  This is a widely-applicable skill that's beneficial in both professional and personal circumstances.  If you'd like to collaborate, I've streamlined the process <a href="/contact/">HERE</a>.</p>`,
             campfire: `<p>Oh boy, buckle up.  The truth is I'm still figuring myself out, but you might be able to glean something from <a href="/building/articles/the-long-road.html">an article</a> I wrote about my experience with therapy and addiction counselling.  Circumstance has changed my perspective from something resembling a desire for meritocracy towards a greater understanding of the unappreciated value of perseverence — how will frequently outperforms talent and how coasting is a disservice to oneself.</p>`
         };
