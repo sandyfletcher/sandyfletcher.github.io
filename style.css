@@ -1,6 +1,7 @@
 @font-face { font-family: 'Codystar'; src: url('/assets/fonts/Codystar.ttf') format('truetype'); font-display: block }
 @font-face { font-family: 'RubikScribble'; src: url('/assets/fonts/RubikScribble.ttf') format('truetype'); font-display: block }
 @font-face { font-family: 'SpecialElite'; src: url('/assets/fonts/SpecialElite.ttf') format('truetype'); font-display: block }
+@font-face { font-family: 'SpaceMono'; src: url('/assets/fonts/SpaceMono-Regular.ttf') format('truetype'); font-display: block }
 /* default */
 *,
 *::before,
@@ -11,14 +12,14 @@
 }
 html {
     margin: 0;
-    height: 100svh; /* dvh to dynamically react to address bar */
+    height: 100svh;
 }
 body {
     margin: 0;
     background-color: #000;
     height: 100%;
     color: #fff;
-    font-family: 'Codystar', sans-serif; /* useful to track what needs to be assigned, change after */
+    font-family: 'SpaceMono', sans-serif;
     overflow-x: hidden;
     display: flex;
 }
