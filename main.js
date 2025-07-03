@@ -1,7 +1,53 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // --- START: SMOOTH PAGE TRANSITIONS ---
+    function handlePageTransition(event) {
+        const link = event.target.closest('a');
+        
+        // Ensure it's a valid, internal link we want to animate
+        if (!link || link.target === '_blank' || link.getAttribute('href').startsWith('#') || link.href.includes('mailto:')) {
+            return;
+        }
+
+        // Check if the link is internal to the site
+        const url = new URL(link.href);
+        if (url.hostname !== window.location.hostname) {
+            return; // It's an external link, let it behave normally
+        }
+
+        event.preventDefault(); // Stop the browser's default navigation
+
+        const destination = link.href;
+        const content = document.querySelector('.content') || document.querySelector('.landing-content');
+
+        // Add a class to trigger the fade-out animation
+        if (content) {
+            content.classList.add('is-leaving');
+        } else {
+            document.body.classList.add('is-leaving');
+        }
+
+        // Wait for the animation to finish, then navigate
+        setTimeout(() => {
+            window.location.href = destination;
+        }, 300); // This duration MUST match the CSS transition time
+    }
+
+    // Add the listener to the whole document
+    document.addEventListener('click', handlePageTransition);
+    // --- END: SMOOTH PAGE TRANSITIONS ---
+
+
     const sidebarPlaceholder = document.getElementById("sidebar-placeholder");
     if (sidebarPlaceholder) {
-        const pathToSidebarHtmlFile = '/sidebar.html'; // fetch sidebar.html from root folder
+        // --- MODIFIED: Robust path calculation for sidebar ---
+        // Calculate the depth of the current page relative to the root.
+        const path = window.location.pathname;
+        const depth = path.endsWith('/') ? path.split('/').length - 2 : path.split('/').length - 1;
+
+        // Create the correct relative path prefix (e.g., './', '../', '../../')
+        const prefix = '../'.repeat(Math.max(0, depth - 1)) || './';
+        const pathToSidebarHtmlFile = `${prefix}sidebar.html`;
+
         fetch(pathToSidebarHtmlFile)
             .then(response => {
                 if (!response.ok) {
@@ -18,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
 
-    // --- UPDATED: Interactive "About" page bio ---
+    // --- Interactive "About" page bio ---
     const bioChoicesContainer = document.querySelector('.bio-choices');
     if (bioChoicesContainer) {
         const bioOutput = document.getElementById('bio-output');
@@ -49,7 +95,6 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(() => {
                 // Now that it's invisible, swap the content
                 if (bioContent[choice]) {
-                    // We don't need the content-wrapper div anymore, but it's harmless to keep.
                     bioOutput.innerHTML = bioContent[choice]; 
                 } else {
                     bioOutput.innerHTML = '';
@@ -60,4 +105,34 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 150); // This duration MUST match the CSS transition time
         });
     }
+    
+    // --- START: "BUILDING" PAGE PROJECT FILTER ---
+    const filterContainer = document.querySelector('.filter-controls');
+    if (filterContainer) {
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterContainer.addEventListener('click', (e) => {
+            const filterButton = e.target.closest('.filter-btn');
+            if (!filterButton) return;
+
+            // Update active button state
+            filterContainer.querySelector('.active').classList.remove('active');
+            filterButton.classList.add('active');
+
+            const filter = filterButton.dataset.filter;
+
+            projectCards.forEach(card => {
+                const tags = card.dataset.tags;
+                const matchesFilter = tags.includes(filter) || filter === 'all';
+                
+                // Add/remove 'hidden' class to trigger CSS transition
+                if (matchesFilter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    }
+    // --- END: "BUILDING" PAGE PROJECT FILTER ---
 });

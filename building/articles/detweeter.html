@@ -32,33 +32,15 @@
 
                     <h2>My Approach & Key Decisions</h2>
                     <p>
-                        The project was built in Python, leveraging its robust ecosystem for automation and GUI development. The core of the application relies on <strong>Selenium</strong> for web browser automation and <strong>Tkinter</strong> for the graphical user interface.
-                    </p>
-                    <p>
-                        A key design principle was user safety and control. I implemented a feature to automatically skip any tweet that the user has bookmarked. This allows for a "scorched earth" approach to deletion while preserving posts that hold value, a critical feature for a potentially destructive tool.
-                    </p>
-                    <p>
-                        To ensure the application remains responsive during the potentially long deletion process, the main automation logic runs in a separate thread. This prevents the Tkinter GUI from freezing, allowing the user to see real-time log updates without interruption.
+                        The project was built in Python, leveraging its robust ecosystem for automation and GUI development. The core of the application relies on <strong>Selenium</strong> for web browser automation and <strong>Tkinter</strong> for the graphical user interface. A key design principle was user safety and control, which led to the implementation of a feature to automatically skip any tweet that the user has bookmarked. To ensure the GUI remains responsive, the main automation logic runs in a separate thread.
                     </p>
 
                     <div class="code-block">
                         <pre><code>
-// This function contains the core logic for processing a single tweet.
-// It checks if the tweet belongs to the user, if it's bookmarked,
-// and then executes the multi-step deletion process.
-
+# This function contains the core logic for processing a single tweet.
 def process_tweet(tweet, settings, wait, driver):
     try:
-        author_handle = tweet.find_element(*LOCATORS["TWEET_AUTHOR_HANDLE"]).text[1:]
-        if author_handle.lower() != settings['handle'].lower():
-            return 'SKIPPED_AUTHOR'
-        
-        if tweet.find_elements(*LOCATORS["BOOKMARK_BUTTON_EXISTS"]):
-            permalink = tweet.find_element(*LOCATORS["TWEET_PERMALINK"]).get_attribute('href')
-            print(f"Skipped (bookmarked): {permalink}")
-            return 'SKIPPED_BOOKMARK'
-        
-        # Qualifies for deletion: click "More", then "Delete", then "Confirm"
+        # ... logic to check author, bookmarks, and delete ...
         more_options_button = tweet.find_element(*LOCATORS["MORE_OPTIONS_BUTTON"])
         driver.execute_script("arguments[0].click();", more_options_button)
         
@@ -70,9 +52,7 @@ def process_tweet(tweet, settings, wait, driver):
 
         wait.until(EC.staleness_of(tweet)) // Wait for tweet to disappear
         return 'DELETED'
-        
-    except (TimeoutException, StaleElementReferenceException, NoSuchElementException) as e:
-        print(f"  - Action failed: {type(e).__name__}. Closing menu and continuing.")
+    except Exception:
         return 'ERROR'
                         </code></pre>
                     </div>
@@ -83,12 +63,11 @@ def process_tweet(tweet, settings, wait, driver):
                         <li><strong>Two Deletion Modes:</strong> Users can choose to delete everything or specify the 'N' most recent tweets.</li>
                         <li><strong>Bookmark Protection:</strong> Automatically identifies and skips bookmarked tweets, preserving important content.</li>
                         <li><strong>Responsive GUI:</strong> A custom-styled Tkinter interface provides real-time progress logging without freezing, thanks to multi-threading.</li>
-                        <li><strong>Secure & Private:</strong> Credentials are used locally for login and are never stored or transmitted elsewhere.</li>
                     </ul>
 
                     <h2>What I Learned</h2>
                     <p>
-                        Building Detweeter was a deep dive into the challenges of web automation on a dynamic, modern web application. I learned the importance of explicit waits (`WebDriverWait`), handling stale element exceptions, and building resilient selectors to deal with a constantly changing front-end. It was also a valuable exercise in designing a user-friendly GUI for a command-line process, reinforcing the importance of clear feedback, non-blocking operations, and user-centric safety features.
+                        Building Detweeter was a deep dive into the challenges of web automation on a dynamic, modern web application. I learned the importance of explicit waits (`WebDriverWait`), handling stale element exceptions, and building resilient selectors to deal with a constantly changing front-end. It was also a valuable exercise in designing a user-friendly GUI for a command-line process, reinforcing the importance of clear feedback and non-blocking operations.
                     </p>
                 </section>
 
