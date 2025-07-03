@@ -353,9 +353,23 @@ body {
     width: 100%;
     height: 180px;
     object-fit: cover; /* This makes images look good */
-    background-color: rgba(0, 0, 0, 0.2); /* A subtle dark background for consistency */
+    background-color: rgba(0, 0, 0, 0.2); /* A fallback dark background */
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
 }
+
+/* --- NEW: Thematic background colors for project cards --- */
+.project-card[data-tags~="html"] .project-thumbnail {
+    background-color: rgba(227, 76, 38, 0.15); /* Subtle orange for HTML */
+}
+.project-card[data-tags~="javascript"] .project-thumbnail {
+    background-color: rgba(240, 219, 79, 0.15); /* Subtle yellow for JS */
+}
+.project-card[data-tags~="python"] .project-thumbnail {
+    background-color: rgba(53, 114, 165, 0.2); /* Subtle blue for Python */
+}
+/* --- END OF NEW STYLES --- */
+
 .project-card-content {
     padding: 1.5rem 2rem;
     flex-grow: 1;
