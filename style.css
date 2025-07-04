@@ -151,6 +151,7 @@ body {
     justify-content: flex-start;
     align-items: stretch;
     overflow-y: auto;
+    overflow-x: hidden; /* ADDED: Prevents horizontal overflow from breaking the layout */
     margin: auto;
     padding: clamp(1.5rem, 2.5rem, 3rem);
 }
@@ -318,7 +319,7 @@ body {
 .projects-grid {
     display: grid;
     /* On small screens, use auto-fit to be responsive */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     justify-content: center;
     position: relative;
