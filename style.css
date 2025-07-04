@@ -287,9 +287,8 @@ body {
     color: #a7c5f9;
 }
 /* building */
-.building-header { /* New wrapper for header and filters */
-    margin-bottom: 3rem;
-}
+/*.building-header {
+    /* margin-bottom: 3rem; may have to remove this */
 .filter-controls {
     display: flex;
     justify-content: center;
