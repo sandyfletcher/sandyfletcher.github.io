@@ -23,16 +23,22 @@
             </div>
             <div class="page-content">
                 <section class="projects-grid">
+
                     <article class="project-card" data-tags="all web html">
-                        <img src="https://placehold.co/600x400/transparent/ffffff?text=HTML" alt="HTML Project Thumbnail" class="project-thumbnail">
+                        <!-- Wrap image and tags in the new container -->
+                        <div class="project-thumbnail-container">
+                            <img src="https://placehold.co/600x400/transparent/ffffff?text=HTML" alt="HTML Project Thumbnail" class="project-thumbnail">
+                            <!-- Move tags here -->
+                            <div class="project-tags">
+                                <span class="tag">Web</span>
+                                <span class="tag">HTML</span>
+                            </div>
+                        </div>
                         <div class="project-card-content">
                             <div>
                                 <h2>HTML</h2>
                                 <p class="project-description">The engine of the internet, still underpinning every site you love.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Web</span>
-                                    <span class="tag">HTML</span>
-                                </div>
+                                <!-- Tags are no longer here -->
                             </div>
                             <div class="project-links">
                                 <a href="https://html.sandyfletcher.ca" class="project-link">Project →</a>
@@ -40,17 +46,20 @@
                             </div>
                         </div>
                     </article>
+
                     <article class="project-card" data-tags="all web design javascript">
-                        <img src="https://placehold.co/600x400/transparent/ffffff?text=IBS" alt="International Bass Station Thumbnail" class="project-thumbnail">
+                        <div class="project-thumbnail-container">
+                            <img src="https://placehold.co/600x400/transparent/ffffff?text=IBS" alt="International Bass Station Thumbnail" class="project-thumbnail">
+                            <div class="project-tags">
+                                <span class="tag">Web</span>
+                                <span class="tag">JavaScript</span>
+                                <span class="tag">Design</span>
+                            </div>
+                        </div>
                         <div class="project-card-content">
                            <div>
                                 <h2>International Bass Station</h2>
                                 <p class="project-description">A radio show archive — complete with custom audio player — and a gentle reminder about calibrating for users globally.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Web</span>
-                                    <span class="tag">JavaScript</span>
-                                    <span class="tag">Design</span>
-                                </div>
                             </div>
                             <div class="project-links">
                                 <a href="https://internationalbassstation.github.io" class="project-link">Project →</a>
@@ -58,17 +67,20 @@
                             </div>
                         </div>
                     </article>
+
                     <article class="project-card" data-tags="all python automation">
-                        <img src="https://placehold.co/600x400/transparent/ffffff?text=Detweeter" alt="Detweeter Thumbnail" class="project-thumbnail">
+                        <div class="project-thumbnail-container">
+                            <img src="https://placehold.co/600x400/transparent/ffffff?text=Detweeter" alt="Detweeter Thumbnail" class="project-thumbnail">
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Automation</span>
+                                <span class="tag">GUI</span>
+                            </div>
+                        </div>
                         <div class="project-card-content">
                             <div>
                                 <h2>Detweeter</h2>
                                 <p class="project-description">A desktop app to reclaim your digital privacy by automatically deleting old tweets, while safely ignoring bookmarked ones.</p>
-                                <div class="project-tags">
-                                    <span class="tag">Python</span>
-                                    <span class="tag">Automation</span>
-                                    <span class="tag">GUI</span>
-                                </div>
                             </div>
                             <div class="project-links">
                                 <a href="https://github.com/sandyfletcher/detweeter" class="project-link">View on GitHub →</a>
@@ -76,6 +88,7 @@
                             </div>
                         </div>
                     </article>
+
                 </section>
             </div>
         </main>
