@@ -314,13 +314,22 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
+/* --- MODIFIED for 3-column max layout --- */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 320px);
+    /* On small screens, use auto-fit to be responsive */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     justify-content: center;
     position: relative;
 }
+/* On larger screens (1024px and up), force 3 columns */
+@media (min-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .project-card {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 0.5rem;
@@ -385,6 +394,8 @@ body {
     margin-bottom: 1.5rem;
     font-size: clamp(0.9rem, 2vw, 1rem);
 }
+
+/* --- MODIFIED for single-line tags --- */
 .project-tags {
     position: absolute;
     bottom: 0.8rem;
@@ -392,9 +403,19 @@ body {
     right: 1rem;
     display: flex;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Prevents tags from wrapping to the next line */
+    overflow-x: auto;  /* Allows horizontal scrolling if tags overflow */
     margin-bottom: 0;
+    padding-bottom: 5px; /* Add padding for scrollbar visibility on some systems */
+
+    /* Hide the scrollbar for a cleaner look */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
+.project-tags::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
 .tag {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
@@ -403,6 +424,7 @@ body {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    white-space: nowrap; /* Ensures tag text doesn't wrap */
 }
 .project-links {
     margin-top: auto; /* Pushes links to the bottom */
