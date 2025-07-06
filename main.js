@@ -26,41 +26,30 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
     }
-    // --- Part 2: Interactive "About" Page Bio ---
-    // This script only runs if the bio choice container exists on the current page.
-    const bioChoicesContainer = document.querySelector('.bio-choices');
-    if (bioChoicesContainer) {
-        const bioOutput = document.getElementById('bio-output');
-        // Store the different bio texts in an object for easy lookup.
-        const bioContent = {
-            minimalist: `<p>I recently got into making websites.</p><p>Click the little icons over there →</p>`,
-            elevator: `<p>I'm skilled at conveying complex information in a digestable manner, which means I'm able to pass anything I know along with ease to any captive audience.  This is a widely-applicable skill that's beneficial in both professional and personal circumstances.  If you'd like to collaborate, I've streamlined the process <a href="/contact/">HERE</a>.</p>`,
-            campfire: `<p>Oh boy, buckle up.  The truth is I'm still figuring myself out, but you might be able to glean something from <a href="/building/articles/the-long-road.html">an article</a> I wrote about my experience with therapy and addiction counselling.  Circumstance has changed my perspective from something resembling a desire for meritocracy towards a greater understanding of the unappreciated value of perseverence — how will frequently outperforms talent and how coasting is a disservice to oneself.</p>`
-        };
-        // Use event delegation for efficiency: one listener on the container instead of one per button.
-        bioChoicesContainer.addEventListener('click', function(e) {
-            const button = e.target.closest('.bio-choice');
-            // Guard clauses: exit early if the click is invalid.
-            // 1. Click wasn't on a button.
-            // 2. The button clicked is already the active one.
-            // 3. The bio text is already in the middle of a fade transition.
-            if (!button || button.classList.contains('active') || bioOutput.classList.contains('is-changing')) {
-                return;
+    // --- Part 2: Progressive Bio Reveal on "About" Page ---
+    const revealTrigger = document.getElementById('bio-reveal-trigger');
+    if (revealTrigger) {
+        revealTrigger.addEventListener('click', function() {
+            // Find the first bio section that is currently still hidden
+            const nextSection = document.querySelector('.bio-section:not(.is-revealed)');
+
+            if (nextSection) {
+                // Reveal it by adding the class that triggers the CSS transition
+                nextSection.classList.add('is-revealed');
             }
-            const choice = button.dataset.bio;
-            // Update the visual state of the buttons.
-            bioChoicesContainer.querySelectorAll('.bio-choice').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            // --- Fade Transition Logic ---
-            // 1. Add a class to trigger the CSS fade-out transition.
-            bioOutput.classList.add('is-changing');
-            // 2. Wait for the fade-out animation to finish before changing the content.
-            setTimeout(() => {
-                // 3. Now that the element is invisible, swap the content.
-                bioOutput.innerHTML = bioContent[choice] || ''; // Default to empty string if no content found.
-                // 4. Remove the class, which triggers the CSS fade-in transition.
-                bioOutput.classList.remove('is-changing');
-            }, 150);
+
+            // After revealing a section, check if there are ANY MORE hidden sections left
+            const moreSectionsExist = document.querySelector('.bio-section:not(.is-revealed)');
+
+            // If no more hidden sections are found, it's time to hide the button
+            if (!moreSectionsExist) {
+                const buttonContainer = this.parentElement;
+                buttonContainer.style.transition = 'opacity 0.5s ease';
+                buttonContainer.style.opacity = '0';
+                buttonContainer.addEventListener('transitionend', () => {
+                    buttonContainer.style.display = 'none';
+                }, { once: true });
+            }
         });
     }
     // --- Part 3: Project Filtering on 'Building' Page (with FLIP Animation) ---

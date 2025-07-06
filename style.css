@@ -209,80 +209,61 @@ body {
     text-decoration-color: rgba(255,255,255,0.7);
 }
 /* about */
-.bio-selector-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 2rem 0;
+.progressive-bio {
+    max-width: 800px;
+    margin: 2rem auto;
     animation: fadeIn 0.8s ease-out;
 }
-.bio-intro-text {
-    font-size: clamp(1.1rem, 2.5vw, 1.2rem);
-    line-height: 1.6;
-    text-align: center;
-    max-width: 650px; /* Keeps line length readable */
-    opacity: 0.8;
-    margin-bottom: 2.5rem; /* Creates space between the text and the buttons */
-}
-.bio-choices {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    width: 100%;
-    max-width: 800px;
-}
-.bio-choice {
-    flex: 1;
-    min-width: 150px;
-    padding: 1rem 1.5rem;
-    font-family: 'SpecialElite', sans-serif;
-    font-size: clamp(1rem, 3vw, 1.2rem);
-    background: transparent;
-    color: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-.bio-choice:hover {
-    background: rgba(255, 255, 255, 0.05);
-    color: rgba(255, 255, 255, 0.9);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-.bio-choice.active {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-.desktop-text { display: inline; }
-.mobile-text { display: none; }
-
-.bio-output {
-    width: 100%;
-    max-width: 800px;
-    min-height: 150px; 
-    padding: 0 5%;
-    transition: opacity 0.15s ease-in-out;
-}
-.bio-output.is-changing {
+.bio-section {
+    /* Set up for smooth reveal animation */
+    transition: opacity 0.5s ease-out, transform 0.4s ease-out, max-height 0.5s ease-out, margin-top 0.4s ease-out;
+    max-height: 0;
     opacity: 0;
+    transform: translateY(15px);
+    overflow: hidden;
+    margin-top: 0;
 }
-.bio-output p {
+.bio-section.is-revealed {
+    /* The visible state for revealed sections */
+    max-height: 1000px; /* Large enough to not clip content */
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 2.5rem; /* Creates space between revealed sections */
+}
+/* The very first section doesn't need a top margin */
+.progressive-bio .bio-section:first-child {
+    margin-top: 0;
+}
+.bio-section p {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     line-height: 1.7;
     opacity: 0.85;
     margin-bottom: 1rem;
 }
-.bio-output a {
+.bio-section a {
     color: #8ab4f8; 
 }
-.bio-output a:hover {
+.bio-section a:hover {
     color: #a7c5f9;
+}
+.reveal-control {
+    margin-top: 2.5rem;
+    padding-left: 18%; /* Match homepage link indentation */
+}
+#bio-reveal-trigger {
+    /* This styles the button to look like a text link */
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    color: #fff;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+#bio-reveal-trigger:hover {
+    opacity: 1;
 }
 /* building */
 .filter-controls {
@@ -777,10 +758,8 @@ body {
     .form-grid {
         grid-template-columns: 1fr;
     }
-    .bio-choices {
-    flex-direction: column; /* Stack the buttons */
-    align-items: stretch; /* Make buttons full width of container */
-    gap: 0.75rem;
+    .reveal-control {
+        padding-left: 0; /* Remove the indent on smaller screens */
     }
     .desktop-text { display: none; } /* Hide desktop text */
     .mobile-text { display: inline; } /* Show mobile text */
