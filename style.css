@@ -247,8 +247,8 @@ body {
     color: #a7c5f9;
 }
 .reveal-control {
-    margin-top: 2.5rem;
-    padding-left: 18%; /* Match homepage link indentation */
+    margin-top: 1rem;
+    padding-left: 50%; /* Match homepage link indentation */
 }
 #bio-reveal-trigger {
     /* This styles the button to look like a text link */
@@ -376,7 +376,6 @@ body {
     margin-bottom: 1.5rem;
     font-size: clamp(0.9rem, 2vw, 1rem);
 }
-
 /* --- MODIFIED for single-line tags --- */
 .project-tags {
     position: absolute;
@@ -397,7 +396,6 @@ body {
 .project-tags::-webkit-scrollbar {
     display: none; /* Chrome, Safari, and Opera */
 }
-
 .tag {
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
@@ -759,7 +757,8 @@ body {
         grid-template-columns: 1fr;
     }
     .reveal-control {
-        padding-left: 0; /* Remove the indent on smaller screens */
+        padding-left: 35%; /* Remove the indent on smaller screens */
+        margin-top: 0.5rem;
     }
     .desktop-text { display: none; } /* Hide desktop text */
     .mobile-text { display: inline; } /* Show mobile text */
