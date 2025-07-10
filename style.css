@@ -313,7 +313,7 @@ body {
 }
 
 .project-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05); /* Fallback color */
     border-radius: 0.5rem;
     display: flex;
     flex-direction: column;
@@ -322,9 +322,26 @@ body {
     overflow: hidden;
     opacity: 1;
     transform: scale(1);
+    position: relative; /* Crucial for positioning the overlay */
+    background-size: cover;
+    background-position: center center;
 }
-/* New class to handle the smooth sliding animation. */
-/* It only transitions the 'transform' property for performance. */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(25, 25, 25, 0.80);
+    border-radius: inherit;
+    transition: background-color 0.4s ease;
+    z-index: 1;
+}
+/* --- ADDED to lift content above overlay --- */
+.project-card .project-thumbnail-container,
+.project-card .project-card-content {
+    position: relative;
+    z-index: 2;
+}
+
 .project-card.is-moving {
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -336,7 +353,9 @@ body {
 }
 .project-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
+}
+.project-card:hover::before {
+    background-color: rgba(25, 25, 25, 0.70);
 }
 .project-thumbnail-container {
     position: relative;
@@ -346,7 +365,7 @@ body {
     height: 180px;
     object-fit: cover;
     background-color: rgba(0, 0, 0, 0.2);
-    display: block;
+    display: none; /* Hide the old placeholder image element */
     transition: background-color 0.3s ease;
 }
 /* Thematic background colors for project cards */
