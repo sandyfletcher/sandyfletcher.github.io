@@ -14,11 +14,11 @@
             <article class="project-content">
                 <header class="project-header">
                     <!-- The main, attention-grabbing title of your project -->
-                    <h1>[Project Name]</h1>
+                    <h1>Project Showcase: [Project Name]</h1>
                     <div class="project-meta">
                         <!-- Update with the completion date and relevant tech/skills -->
-                        <span class="project-date">2024</span>
-                        <span class="project-tags">Skill One, Skill Two, Skill Three</span>
+                        <span class="project-date">October 2024</span>
+                        <span class="project-tags">Web Development, JavaScript, CSS Grid</span>
                     </div>
                 </header>
 
@@ -32,28 +32,42 @@
                     <h2>The Goal</h2>
                     <p>
                         Describe the initial challenge or objective. What was the "why" behind building this? Were you trying to learn a specific technology, solve a personal problem, or explore a design concept? This sets the context for all the decisions that follow.
+                        For example: <em>"I wanted to build a tool that was faster and more private than online alternatives, while also giving me a practical project to deepen my understanding of the Fetch API and CSS Flexbox."</em>
                     </p>
 
                     <h2>My Approach & Key Decisions</h2>
                     <p>
                         Walk the reader through your process. This is the core of the write-up. Talk about the technical choices you made and, more importantly, <em>why</em> you made them. Did you choose a grid over flexbox for a layout? Why? Did you structure your JavaScript in a particular way? Explain the reasoning.
                     </p>
+                    <p>
+                        You can link to external resources or concepts, like this reference to the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API" target="_blank" rel="noopener noreferrer">MDN page for the Fetch API</a>. It shows you're engaging with the broader development community.
+                    </p>
 
                     <div class="code-block">
                         <pre><code>
 // A meaningful code snippet is more powerful than a generic one.
 // Explain what this code does and why it's important to the project.
-function yourAwesomeFunction() {
-  console.log("This code demonstrates a key concept.");
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Could not fetch data:', error);
+  }
 }
                         </code></pre>
                     </div>
 
                     <h3>Key Features</h3>
+                    <p>Use a list to highlight the most important features or outcomes of the project. This makes it easy for visitors to scan.</p>
                     <ul class="feature-list">
-                        <li><strong>Feature One:</strong> A short description of a standout feature.</li>
-                        <li><strong>Feature Two:</strong> Explain another compelling aspect of the project.</li>
-                        <li><strong>Feature Three:</strong> Highlight a technical or design achievement.</li>
+                        <li><strong>Responsive Design:</strong> The layout fluidly adapts from mobile to desktop screens using CSS Grid and clamp functions.</li>
+                        <li><strong>Dynamic Content Loading:</strong> Utilized the Fetch API to load external data without a page refresh, as seen with the site's sidebar.</li>
+                        <li><strong>Accessible Forms:</strong> Ensured all form inputs have associated labels and proper focus states for keyboard navigation.</li>
                     </ul>
 
                     <h2>What I Learned</h2>
@@ -70,9 +84,10 @@ function yourAwesomeFunction() {
             </article>
         </main>
         
+        <!-- The sidebar placeholder is loaded dynamically by main.js -->
         <div id="sidebar-placeholder"></div>
     </div>
     <!-- Adjust path to main.js -->
-    <script src="../../main.js" defer></script>
+    <script src="../main.js" defer></script>
 </body>
 </html>
