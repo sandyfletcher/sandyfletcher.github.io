@@ -1,48 +1,39 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // --- Part 1: Dynamically Load Sidebar ---
-    // This prevents having to copy/paste the sidebar HTML into every page.
+    // dynamically load sidebar instead of having to copy/paste HTML repeatedly
     const sidebarPlaceholder = document.getElementById("sidebar-placeholder");
     if (sidebarPlaceholder) {
-        // Use a root-relative path to ensure it works from any page depth (e.g., /about/ or /building/articles/).
+        // use a root-relative path to ensure it works from any page depth
         const pathToSidebarHtmlFile = '/sidebar.html'; 
         fetch(pathToSidebarHtmlFile)
             .then(response => {
-                // Check if the request was successful.
+                // check if the request was successful.
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status} for ${pathToSidebarHtmlFile}`);
                 }
                 return response.text();
             })
-            .then(html => {
-                // Replace the placeholder div entirely with the fetched sidebar HTML.
-                // outerHTML is better than innerHTML here because it removes the placeholder div itself.
+            .then(html => {// replace placeholder div with fetched sidebar HTML 
                 sidebarPlaceholder.outerHTML = html;
             })
             .catch(error => {
-                // Gracefully handle errors, like if the file is missing or the network fails.
+                // gracefully handle errors like file missing or network failure
                 console.error("Could not load sidebar:", error);
                 if(sidebarPlaceholder) {
                     sidebarPlaceholder.innerHTML = "<p style='color: #ff8a8a; padding: 1rem; text-align: center;'>Error loading sidebar.</p>";
                 }
             });
     }
-    // --- Part 2: Progressive Bio Reveal on "About" Page ---
+    // progressive bio reveal — about page
     const revealTrigger = document.getElementById('bio-reveal-trigger');
     if (revealTrigger) {
         revealTrigger.addEventListener('click', function() {
-            // Find the first bio section that is currently still hidden
+            // find first bio section that is currently still hidden
             const nextSection = document.querySelector('.bio-section:not(.is-revealed)');
-
             if (nextSection) {
-                // Reveal it by adding the class that triggers the CSS transition
-                nextSection.classList.add('is-revealed');
-            }
-
-            // After revealing a section, check if there are ANY MORE hidden sections left
-            const moreSectionsExist = document.querySelector('.bio-section:not(.is-revealed)');
-
-            // If no more hidden sections are found, it's time to hide the button
-            if (!moreSectionsExist) {
+                nextSection.classList.add('is-revealed'); // reveal it by adding class that triggers CSS transition
+            } // after revealing a section, check if there are any hidden sections remaining
+            const moreSectionsExist = document.querySelector('.bio-section:not(.is-revealed)'); 
+            if (!moreSectionsExist) { // if no more hidden sections found, hide button
                 const buttonContainer = this.parentElement;
                 buttonContainer.style.transition = 'opacity 0.5s ease';
                 buttonContainer.style.opacity = '0';
@@ -52,32 +43,26 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-    // --- Part 3: Project Filtering on 'Building' Page (with FLIP Animation) ---
+    // project filtering — building page
     const filterControls = document.querySelector('.filter-controls');
     if (filterControls) {
         const projectCards = document.querySelectorAll('.project-card');
         const projectsGrid = document.querySelector('.projects-grid'); 
-
         filterControls.addEventListener('click', function(e) {
             const button = e.target.closest('.filter-btn');
             if (!button || button.classList.contains('active')) {
                 return;
-            }
-
-            // Update active button state
+            } // update active button state
             filterControls.querySelector('.filter-btn.active').classList.remove('active');
             button.classList.add('active');
             const filterValue = button.dataset.filter;
-            
             const gridRect = projectsGrid.getBoundingClientRect();
-
-            // 1. FIRST: Record the starting position and size of all cards.
+            // FIRST: record starting position and size of all cards
             const initialPositions = new Map();
             projectCards.forEach(card => {
                 initialPositions.set(card, card.getBoundingClientRect());
             });
-
-            // 2. LAST (Revised Logic): Separate cards into 'show' and 'hide' groups
+            // LAST: separate cards into 'show' and 'hide' groups
             const cardsToHide = [];
             const cardsToShow = [];
             projectCards.forEach(card => {
@@ -89,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     cardsToHide.push(card);
                 }
             });
-
             cardsToHide.forEach(card => {
                 const initialPos = initialPositions.get(card);
                 card.style.position = 'absolute';
@@ -98,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 card.style.width = `${initialPos.width}px`;
                 card.classList.add('hidden');
             });
-
             cardsToShow.forEach(card => {
                 card.classList.remove('hidden');
                 card.style.position = '';
@@ -106,33 +89,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 card.style.top = '';
                 card.style.width = '';
             });
-
-            // Defer the animation logic until the browser has painted the layout changes.
-            requestAnimationFrame(() => {
-                // 3. INVERT & PLAY: Animate the cards that are *remaining*.
+            requestAnimationFrame(() => { // defer animation logic until browser has painted layout changes
+                // INVERT & PLAY: animate cards that are remaining
                 cardsToShow.forEach(card => {
                     const finalPosition = card.getBoundingClientRect();
                     const initialPosition = initialPositions.get(card);
-
                     const deltaX = initialPosition.left - finalPosition.left;
                     const deltaY = initialPosition.top - finalPosition.top;
-
                     if (Math.abs(deltaX) < 1 && Math.abs(deltaY) < 1) {
-                        return; // Don't animate cards that haven't moved.
+                        return; // don't animate cards that haven't moved
                     }
-
-                    // INVERT: Move the card back to its old position without animation.
+                    // INVERT: move card back to its old position without animation
                     card.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-
-                    // *** THE FIX IS HERE ***
-                    // PLAY: In the *next* animation frame, add the transition class and
-                    // remove the transform to animate the card to its new, final position.
+                    // PLAY: in next animation frame, add transition class and remove transform to animate card to its final position
                     requestAnimationFrame(() => {
                         card.classList.add('is-moving');
                         card.style.transform = '';
                     });
-                    
-                    // Clean up the transition class after the animation finishes
+                    // clean up transition class after animation finishes
                     card.addEventListener('transitionend', () => {
                         card.classList.remove('is-moving');
                     }, { once: true });
