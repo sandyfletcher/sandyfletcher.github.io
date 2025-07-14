@@ -2,7 +2,7 @@
 @font-face { font-family: 'RubikScribble'; src: url('/assets/fonts/RubikScribble.ttf') format('truetype'); font-display: block }
 @font-face { font-family: 'SpecialElite'; src: url('/assets/fonts/SpecialElite.ttf') format('truetype'); font-display: block }
 @font-face { font-family: 'SpaceMono'; src: url('/assets/fonts/SpaceMono-Regular.ttf') format('truetype'); font-display: block }
-/* default */
+/* DEFAULT */
 *,
 *::before,
 *::after {
@@ -29,7 +29,142 @@ body {
     flex: 1;
     overflow: hidden;
 }
-/* landing */
+.content {
+    height: 100%;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: auto;
+    padding: clamp(1.5rem, 2.5rem, 3rem);
+}
+.page-header {
+    width: 100%;
+}
+.page-header h1 {
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    opacity: 0.9;
+    margin: 0;
+}
+.header-underline {
+    width: 10rem;
+    height: 0.4rem;
+    background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
+    margin-top: 0.5rem;
+}
+.page-content {
+    width: 100%;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: left;
+}
+.page-content h2 {
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    opacity: 0.9;
+    margin-bottom: 1.5rem;
+}
+.page-content h3 {
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    opacity: 0.85;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+.page-content p {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    line-height: 1.7;
+    opacity: 0.75;
+    margin-bottom: 1rem;
+}
+.page-content a {
+    color: #367ae7;
+    text-decoration: underline;
+    transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+.page-content a:hover {
+    color: #95baf8;
+    text-decoration-color: rgba(255,255,255,0.7);
+}
+/* SCROLLBAR */
+.content::-webkit-scrollbar, /* webkit browsers */
+.sidebar-content::-webkit-scrollbar {
+    width: 12px;
+}
+.content::-webkit-scrollbar-track,
+.sidebar-content::-webkit-scrollbar-track { /* track scrollbar sits on */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.content::-webkit-scrollbar-thumb,
+.sidebar-content::-webkit-scrollbar-thumb { /* draggable thumb */
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.05); /* padding effect around thumb */
+}
+.content::-webkit-scrollbar-thumb:hover,
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.4); /* more visible on hover */
+}
+.content, /* firefox */
+.sidebar-content { 
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.05);
+}
+/* SIDEBAR */
+.sidebar {
+    width: 4.5rem;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+.sidebar-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+}
+.icon-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'RubikScribble', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+}
+.icon-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.icon-image {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+}
+/* LANDING */
 .landing-content {
     height: 100%;
     width: 100%;
@@ -97,126 +232,13 @@ body {
     white-space: nowrap;
     transition: max-width 0.5s ease, opacity 0.3s ease 0.1s;
 }
-/* sidebar */
-.sidebar {
-    width: 4.5rem;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-    backdrop-filter: blur(10px);
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
-}
-.sidebar-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    align-items: center;
-    padding: 1rem 0;
-    gap: 1rem;
-}
-.icon-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    flex-shrink: 0;
-    border-radius: 0.75rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    font-family: 'RubikScribble', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1;
-}
-.icon-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-.icon-image {
-    width: 1.5rem;
-    height: 1.5rem;
-    object-fit: contain;
-}
-/* subpages */
-.content {
-    height: 100%;
-    width: 100%;
-    min-width: 0;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow-y: auto;
-    overflow-x: hidden; /* ADDED: Prevents horizontal overflow from breaking the layout */
-    margin: auto;
-    padding: clamp(1.5rem, 2.5rem, 3rem);
-}
-.page-header {
-    width: 100%;
-}
-.page-header h1 {
-    font-family: 'SpecialElite', sans-serif;
-    font-size: clamp(3rem, 8vw, 5rem);
-    opacity: 0.9;
-    margin: 0;
-}
-.header-underline {
-    width: 10rem;
-    height: 0.4rem;
-    background: linear-gradient(90deg, rgba(255,255,255,0.6), transparent);
-    margin-top: 0.5rem;
-}
-/* should this be specialized or general? */
-.page-content {
-    width: 100%;
-    padding: 3%;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    text-align: left;
-}
-.page-content h2 {
-    font-family: 'SpecialElite', sans-serif;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
-    opacity: 0.9;
-    margin-bottom: 1.5rem;
-}
-.page-content h3 {
-    font-family: 'SpecialElite', sans-serif;
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
-    opacity: 0.85;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    line-height: 1.4;
-}
-.page-content p {
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    line-height: 1.7;
-    opacity: 0.75;
-    margin-bottom: 1rem;
-}
-.page-content a {
-    color: #367ae7;
-    text-decoration: underline;
-    transition: color 0.3s ease, text-decoration-color 0.3s ease;
-}
-.page-content a:hover {
-    color: #95baf8;
-    text-decoration-color: rgba(255,255,255,0.7);
-}
-/* about */
+/* ABOUT */
 .progressive-bio {
     max-width: 800px;
     margin: 2rem auto;
     animation: fadeIn 0.8s ease-out;
 }
 .bio-section {
-    /* Set up for smooth reveal animation */
     transition: opacity 0.5s ease-out, transform 0.4s ease-out, max-height 0.5s ease-out, margin-top 0.4s ease-out;
     max-height: 0;
     opacity: 0;
@@ -225,15 +247,13 @@ body {
     margin-top: 0;
 }
 .bio-section.is-revealed {
-    /* The visible state for revealed sections */
-    max-height: 1000px; /* Large enough to not clip content */
+    max-height: 1000px;
     opacity: 1;
     transform: translateY(0);
-    margin-top: 2.5rem; /* Creates space between revealed sections */
+    margin-top: 2.5rem;
 }
-/* The very first section doesn't need a top margin */
 .progressive-bio .bio-section:first-child {
-    margin-top: 0;
+    margin-top: 0; /* first section doesn't need a top margin */
 }
 .bio-section p {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
@@ -249,10 +269,9 @@ body {
 }
 .reveal-control {
     margin-top: 1rem;
-    padding-left: 50%; /* Match homepage link indentation */
+    padding-left: 50%;
 }
 #bio-reveal-trigger {
-    /* This styles the button to look like a text link */
     font-family: 'SpecialElite', sans-serif;
     font-size: clamp(1rem, 2.5vw, 1.5rem);
     color: #fff;
@@ -266,13 +285,13 @@ body {
 #bio-reveal-trigger:hover {
     opacity: 1;
 }
-/* building */
+/* BUILDING */
 .filter-controls {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.8rem;
-    margin-top: 2.5rem;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 .filter-btn {
     padding: 0.5rem 1.2rem;
@@ -297,20 +316,12 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-/* --- for 3-column max layout --- */
 .projects-grid {
     display: grid;
-    /* On small screens, use auto-fit to be responsive */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     justify-content: center;
     position: relative;
-}
-/* On larger screens (1024px and up), force 3 columns */
-@media (min-width: 1024px) {
-    .projects-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
 }
 .project-card {
     background: rgba(255, 255, 255, 0.05);
@@ -318,7 +329,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: opacity 0.4s ease; /* ONLY the opacity transition remains */
+    transition: opacity 0.4s ease;
     overflow: hidden;
     opacity: 1;
     transform: scale(1);
@@ -335,7 +346,6 @@ body {
     transition: background-color 0.4s ease;
     z-index: 1;
 }
-/* --- lift content above overlay --- */
 .project-card .project-thumbnail-container,
 .project-card .project-card-content {
     position: relative;
@@ -345,10 +355,10 @@ body {
     transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .project-card.hidden {
-    position: absolute; /* Takes the card out of the grid flow */
+    position: absolute;
     opacity: 0;
     transform: scale(0.9);
-    pointer-events: none; /* Prevents clicking on an invisible, transitioning card */
+    pointer-events: none;
 }
 .project-card:hover {
     transform: translateY(-5px);
@@ -364,7 +374,7 @@ body {
     height: 180px;
     object-fit: cover;
     background-color: rgba(0, 0, 0, 0.2);
-    display: none; /* Hide the old placeholder image element */
+    display: none;
     transition: background-color 0.3s ease;
 }
 /* Thematic background colors for project cards */
@@ -394,25 +404,9 @@ body {
     margin-bottom: 1.5rem;
     font-size: clamp(0.9rem, 2vw, 1rem);
 }
-/* --- MODIFIED for single-line tags --- */
 .project-tags {
-    position: absolute;
-    bottom: 0.8rem;
-    left: 1rem;
-    right: 1rem;
     display: flex;
-    gap: 0.5rem;
-    flex-wrap: nowrap; /* Prevents tags from wrapping to the next line */
-    overflow-x: auto;  /* Allows horizontal scrolling if tags overflow */
-    margin-bottom: 0;
-    padding-bottom: 5px; /* Add padding for scrollbar visibility on some systems */
-
-    /* Hide the scrollbar for a cleaner look */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-.project-tags::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Opera */
+    gap: 1rem;
 }
 .tag {
     background: rgba(0, 0, 0, 0.5);
@@ -422,10 +416,10 @@ body {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    white-space: nowrap; /* Ensures tag text doesn't wrap */
+    white-space: nowrap;
 }
 .project-links {
-    margin-top: auto; /* Pushes links to the bottom */
+    margin-top: auto;
 }
 .project-link {
     color: #fff;
@@ -440,13 +434,13 @@ body {
     opacity: 1;
     transform: translateX(5px);
 }
-/* contact */
+/* CONTACT */
 .contact-section {
-    flex-grow: 1; /* These sections will fill the grown .page-content */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Vertically center children */
-    align-items: center;   /* Horizontally center children */
+    justify-content: center;
+    align-items: center;
     animation: fadeIn 0.8s ease-out;
 }
 .contact-intro {
@@ -542,7 +536,7 @@ body {
     opacity: 1;
     transform: translateX(5px);
 }
-/* articles */
+/* ARTICLE */
 .project-content {
     animation: fadeIn 0.8s ease-out;
 }
@@ -653,16 +647,12 @@ body {
     flex-wrap: wrap;
     gap: 2rem;
 }
-/* animation */
+/* ANIMATION */
 .content, .landing-content {
-    /* Initial state for fade-in animation on load */
     animation: contentFadeIn 0.5s ease-out 0.2s forwards;
     opacity: 0;
-    
-    /* Transition for fade-out on navigation */
     transition: opacity 0.3s ease-in;
 }
-/* Class added by JS to trigger fade-out */
 .content.is-leaving,
 .landing-content.is-leaving {
     opacity: 0;
@@ -687,7 +677,7 @@ body {
         transform: translateY(0);
     }
 }
-/* adaptive elements */
+/* ADAPTIVE */
 @media (hover: hover) {
     .expandable-letter:hover .word-container {
         transform: translateY(-50%) translateX(2rem) scale(1.2);
@@ -781,35 +771,8 @@ body {
     .desktop-text { display: none; } /* Hide desktop text */
     .mobile-text { display: inline; } /* Show mobile text */
 }
-/* --- Custom Scrollbar Styling --- */
-
-/* For WebKit Browsers (Chrome, Safari, Edge) */
-.content::-webkit-scrollbar,
-.sidebar-content::-webkit-scrollbar {
-    width: 12px; /* Width of the entire scrollbar */
-}
-
-.content::-webkit-scrollbar-track,
-.sidebar-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05); /* The "track" the scrollbar sits on */
-    border-radius: 10px;
-}
-
-.content::-webkit-scrollbar-thumb,
-.sidebar-content::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.25); /* The draggable "thumb" */
-    border-radius: 10px;
-    border: 3px solid rgba(255, 255, 255, 0.05); /* Creates a padding effect around the thumb */
-}
-
-.content::-webkit-scrollbar-thumb:hover,
-.sidebar-content::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(255, 255, 255, 0.4); /* Make thumb more visible on hover */
-}
-
-/* For Firefox */
-.content,
-.sidebar-content {
-    scrollbar-width: thin; /* Can be "auto", "thin", or "none" */
-    scrollbar-color: rgba(255, 255, 255, 0.4) rgba(255, 255, 255, 0.05); /* thumb-color track-color */
+@media (min-width: 1024px) {
+    .projects-grid { /* force 3 columns */
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
