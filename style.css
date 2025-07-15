@@ -253,7 +253,7 @@ body {
     margin-top: 2.5rem;
 }
 .progressive-bio .bio-section:first-child {
-    margin-top: 0; /* first section doesn't need a top margin */
+    margin-top: 0; /* first section doesn't need top margin */
 }
 .bio-section p {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
@@ -294,7 +294,7 @@ body {
     margin-bottom: 2rem;
 }
 .filter-btn {
-    padding: 0.5rem 1.2rem;
+    padding: 0.5rem 1rem;
     font-family: 'SpecialElite', sans-serif;
     font-size: clamp(0.8rem, 2vw, 1rem);
     background: transparent;
@@ -765,11 +765,11 @@ body {
         grid-template-columns: 1fr;
     }
     .reveal-control {
-        padding-left: 35%; /* Remove the indent on smaller screens */
+        padding-left: 35%;
         margin-top: 0.5rem;
     }
-    .desktop-text { display: none; } /* Hide desktop text */
-    .mobile-text { display: inline; } /* Show mobile text */
+    .desktop-text { display: none; }
+    .mobile-text { display: inline; }
 }
 @media (min-width: 1024px) {
     .projects-grid { /* force 3 columns */
