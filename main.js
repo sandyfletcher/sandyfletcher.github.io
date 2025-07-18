@@ -114,4 +114,78 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
+
+    // Image Gallery Logic - for the /gallery/ page
+    const galleryContainer = document.querySelector('.gallery-container');
+    if (galleryContainer) {
+        // --- DEFINE YOUR IMAGES AND CAPTIONS HERE ---
+        // Create a folder like /assets/gallery/ to store these images
+        const galleryItems = [
+            {
+                src: '/assets/gallery/image1.jpg',
+                caption: 'The journey begins with a single step into the unknown.'
+            },
+            {
+                src: '/assets/gallery/image2.jpg',
+                caption: 'There are patterns in the chaos if you look closely enough.'
+            },
+            {
+                src: 'https://picsum.photos/seed/gallery3/1920/1080',
+                caption: 'And sometimes, the path leads to unexpected places. (This is a placeholder image)'
+            }
+            // Add more image objects here
+        ];
+
+        const galleryImage = document.getElementById('gallery-image');
+        const galleryCaption = document.getElementById('gallery-caption');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        let currentIndex = 0;
+
+        function updateGallery(index) {
+            const item = galleryItems[index];
+            
+            // Fade out the old image
+            galleryImage.classList.remove('is-loaded');
+
+            // Wait for fade-out to finish before changing the source
+            setTimeout(() => {
+                galleryImage.src = item.src;
+                galleryCaption.textContent = item.caption;
+
+                // Preload the next and previous images for a smoother experience
+                preloadAdjacentImages(index);
+
+                // Once the new image is loaded into the browser cache, fade it in
+                galleryImage.onload = () => {
+                    galleryImage.classList.add('is-loaded');
+                };
+            }, 300); // Half the transition duration
+        }
+        
+        function preloadAdjacentImages(index) {
+            const prevIndex = (index - 1 + galleryItems.length) % galleryItems.length;
+            const nextIndex = (index + 1) % galleryItems.length;
+
+            const prevImage = new Image();
+            prevImage.src = galleryItems[prevIndex].src;
+
+            const nextImage = new Image();
+            nextImage.src = galleryItems[nextIndex].src;
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % galleryItems.length; // Wraps to the beginning
+            updateGallery(currentIndex);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length; // Wraps to the end
+            updateGallery(currentIndex);
+        });
+
+        // Initial load
+        updateGallery(currentIndex);
+    }
 });

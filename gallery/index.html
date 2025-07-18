@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Further - Sandy Fletcher</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <!-- The path to style.css is now ../ because we are one directory deeper -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- We use a new main container class for our specific layout -->
+        <main class="gallery-container">
+            <div class="gallery-image-wrapper">
+                <!-- The image will be set by JavaScript -->
+                <img id="gallery-image" src="" alt="A visual exploration.">
+            </div>
+            <div class="gallery-controls">
+                <button id="prev-btn" class="gallery-nav-btn" title="Previous">←</button>
+                <!-- The caption will be set by JavaScript -->
+                <p id="gallery-caption"></p>
+                <button id="next-btn" class="gallery-nav-btn" title="Next">→</button>
+            </div>
+        </main>
+        
+        <div id="sidebar-placeholder"></div>
+    </div>
+    <!-- The path to main.js is also now ../ -->
+    <script src="../main.js" defer></script>
+</body>
+</html>

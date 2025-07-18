@@ -647,6 +647,76 @@ body {
     flex-wrap: wrap;
     gap: 2rem;
 }
+/* GALLERY / IMAGE ARTICLE */
+.gallery-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    background-color: #000; /* Ensures a black background */
+    flex: 1;
+    overflow: hidden;
+}
+.gallery-image-wrapper {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: 88vh; /* Limits image height to leave space for controls */
+}
+#gallery-image {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    object-fit: contain; /* This is key: it scales the image to fit while preserving aspect ratio */
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    opacity: 0; /* Will be faded in by JS */
+    transition: opacity 0.6s ease-in-out;
+}
+#gallery-image.is-loaded {
+    opacity: 1;
+}
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 900px; /* Keeps controls from being too far apart on wide screens */
+    padding: 1rem 0;
+    color: #fff;
+    flex-shrink: 0; /* Prevents the controls from shrinking */
+}
+#gallery-caption {
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    text-align: center;
+    opacity: 0.7;
+    margin: 0 1.5rem;
+    flex-grow: 1;
+    line-height: 1.5;
+}
+.gallery-nav-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'SpaceMono', sans-serif;
+    font-size: 2.5rem;
+    cursor: pointer;
+    padding: 0 1rem;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+.gallery-nav-btn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
 /* ANIMATION */
 .content, .landing-content {
     animation: contentFadeIn 0.5s ease-out 0.2s forwards;
