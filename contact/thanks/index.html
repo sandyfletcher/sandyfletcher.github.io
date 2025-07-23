@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanks! - Sandy Fletcher</title>
+    <!-- Use root-relative paths so it works from any directory depth -->
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- We use the "thanks-page" class to apply special centering styles -->
+        <main class="content thanks-page">
+            <div class="thanks-message">
+                <h1>Thank You!</h1>
+                <p>Your message has been sent. I'll get back to you as soon as I can.</p>
+                <p class="redirect-notice">You will be redirected to the homepage shortly.</p>
+            </div>
+        </main>
+        
+        <!-- The sidebar will be loaded here by main.js -->
+        <div id="sidebar-placeholder"></div>
+    </div>
+
+    <!-- Load the main script to fetch the sidebar -->
+    <script src="/main.js" defer></script>
+    
+    <!-- This inline script handles the redirect after a short delay -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                // Redirects to the root of your site
+                window.location.href = '/'; 
+            }, 4000); // Delay in milliseconds (4000ms = 4 seconds)
+        });
+    </script>
+</body>
+</html>
