@@ -440,31 +440,30 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
     animation: fadeIn 0.8s ease-out;
+    width: 100%;
+}
+.contact-wrapper {
+    width: 100%;
+    max-width: 800px;
 }
 .contact-intro {
-    font-size: 1.4rem;
-    line-height: 1.6;
-    margin-bottom: 3rem;
+    font-size: clamp(1.1rem, 3vw, 1.2rem);
+    line-height: 1.7;
     opacity: 0.8;
-    text-align: center;
-}
-.contact-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 4rem;
+    text-align: left;
 }
 .contact-form {
     width: 100%;
+    margin-top: 3rem
 }
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
     margin-bottom: 1.5rem;
-}
-.form-group {
+}.form-group {
     margin-bottom: 1.5rem;
 }
 .form-group label {
@@ -499,7 +498,7 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'SpecialElite', sans-serif; /* Add this line */
+    font-family: 'SpecialElite', sans-serif;
 }
 .button-primary {
     background: rgba(255, 255, 255, 0.9);
