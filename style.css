@@ -557,6 +557,13 @@ body {
     margin-bottom: 1rem;
     line-height: 1.4;
 }
+.project-details h4 {
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    opacity: 0.8;
+    margin-top: 1rem;
+    margin-bottom: 0.8rem;
+}
 .project-details p {
     font-size: clamp(1rem, 2.5vw, 1.1rem);
     line-height: 1.7;
@@ -586,12 +593,12 @@ body {
     text-decoration-color: rgba(255,255,255,0.7);
 }
 .project-header {
-    margin-bottom: 4rem;
+    margin-bottom: 0rem;
 }
 .project-header h1 {
     font-family: 'SpecialElite', sans-serif;
     font-size: clamp(2.5rem, 6vw, 4rem);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     opacity: 0.9;
 }
 .project-meta {
@@ -604,15 +611,15 @@ body {
 .project-intro {
     font-size: 1.4rem;
     line-height: 1.6;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
     opacity: 0.8;
 }
 .code-block {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px;
-    padding: 1.5rem;
-    margin: 2rem 0;
+    padding: 0 1rem;
+    margin: 1rem 0;
     overflow-x: auto;
 }
 .code-block code {
@@ -641,8 +648,8 @@ body {
     color: #fff;
 }
 .project-footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-wrap: wrap;
