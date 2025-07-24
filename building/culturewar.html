@@ -284,20 +284,84 @@ extra UI code
                         There are a couple fun features I dreamt up while working on the bones, and I think they'll improve the user experience for the better.
                     </p>
                     <ul class="feature-list">
-                        <li><strong>1) REAL-TIME STATS: </strong></li>
+                        <li><strong>1) REAL-TIME STATS</strong></li>
                     </ul>
                     <p>
                         I got the idea to replace the header with a real-time tracking of troops in-game, and tried a couple of approaches before landing on what's in-game now.
-                        Since each player is assigned a number, 1 up to 6, we can easily arrange them in that same configuration in the header, and colour code them appropriately.
-                        From there it's division
+                        Since each player is assigned a number (1 through 6), we can easily arrange them in that same configuration in the header, and colour code them accordingly.
+                        From there it's division, with player troops as the numerator and total troops as the denominator.
+                        That leaves us starting most games with the bar half-white, representing the yet-unconquered populations of neutral planets.
+                        It's an addition that provides a much-needed pop of colour while also offering valuable game data at a glance.
                     </p>
+                    <div class="code-block">
+                        <pre><code>
+troop tracking code
+                        </code></pre>
+                    </div> 
+                    <ul class="feature-list">
+                        <li><strong>2) PACE CONTROL</strong></li>
+                    </ul>
                     <p>
-                        Once the above is written, we can discuss for-fun features like the tracking bar and footer speed/allocation, how everything comes together, etc.
+                        The footer also replaces itself in-game with a sliding bar, but the meaning differs dependent on if a human player's involved.
+                        For bot-only battles, it converts to a slider bar that controls the aforementioned delta time multiplier, and therefore the speed of the game.
+                        In testing I found there were far too many games that ended in stalemates, which meant spending a lot of time watching the intergalactic equivalent of paint drying.
+                        Allowing the pace of the game to be quadrupled means you can speed through games without disturbing the results, and slowing games down lets you examine the manoeuvres of the better bots in slow motion.
+                    </p>                        
+                    <div class="code-block">
+                        <pre><code>
+slider bar code
+                        </code></pre>
+                    </div>     
+                    <ul class="feature-list">
+                        <li><strong>3) TACTICAL ALLOCATION</strong></li>
+                    </ul>
+                    <p>
+                        We've done the work to create a responsive UI for players to micro-manage their troops, but there's something missing.
+                        Sure, we can select from our planets with precision, but when they get sent out, it's always half.
+                        To allow players a bit more granularity, we'll use the footer slider bar to represent the percentage of dispatched troops.
+                    </p>  
+                    <div class="code-block">
+                        <pre><code>
+percentage dispatch code
+                        </code></pre>
+                    </div>  
+                    <ul class="feature-list">
+                        <li><strong>4) SPEAKING ROBOT</strong></li>
+                    </ul>
+                    <p>
+                        To give each of our battlebots a fair fight, we need to standardize the way they interact with the game.
+                        This is multi-faceted, but we'll start by creating a singular file holding all the functions they'd ever need.
+                        Instead of having each bot running their own calculations about, for instance, how long's left in the game, we can do the math once and offer the answer up to anyone who asks.
+                        Essentially, it's an API — a real-time repository of data available for request when asked nicely.
+                        Our combatants all get the same info about troop movement, production rates, and everything captured in the colourful header bar.
                     </p>
-                    <h3>Game API as a lens for bots to look through</h3>
+                    <div class="code-block">
+                        <pre><code>
+example function summarizing API value
+                        </code></pre>
+                    </div>    
                     <p>
-                        the API file for bots gives them a speedy way to inform their decisions and ensure no one has access to extra info others don't.
-                        we can discuss how to prompt the LLM most effectively and how they asked to have it fed to them
+                        If we're going to have LLMs write their own bot scripts, we also need to be fair about the info they're working with.
+                        Each of them has a different "context window", or amount of data they're able to accept.
+                        My view is that's their fault!
+                        All we can do is decide on a priority list and feed as much to the model as they're able to consume.
+                        At a minimum, we'll be able to show them the API file and a standardized prompt describing what we want them to output:
+                    </p>
+                    <div class="code-block">
+                        <pre><code>
+standardized prompt and how they asked to have it fed to them
+                        </code></pre>
+                    </div>
+                    <p>
+                        It's taken some effort, but we've assembled a playable game and the means to recruit players.
+                        Let's get ready to rumble!
+                    </p>
+                    <h3>Meet Your Gladiators</h3>
+                    <ul class="feature-list">
+                        <li><strong>CLAUDE 3.5</strong></li>
+                    </ul>
+                    <p>
+                        
                     </p>
                     <h3>Lessons Learned</h3>
                     <p>
