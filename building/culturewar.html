@@ -167,7 +167,49 @@ generateHumanPlayerPlanets(humanPlayers) {
                         When everyone's positioned, we add the neutral planets using a similar (more random) process.
                     </p>
                     <ul class="feature-list">
-                        <li><strong>2) TROOP CREATION: </strong>DEVELOP A FORMULA DICTATING A PLANET'S VARIABLE RATE OF PRODUCTION</li>
+                        <li><strong>2) DELTA TIME: </strong>RELATIVITY REQUIRES A FOUNDATIONAL UNIT OF MEASUREMENT</li>
+                    </ul>   
+                    <p>
+                        If we're going to implement a timer on the game, we need to define time in a quantifiable way.
+                        Luckily JavaScript has a built-in system for this, and it works by starting at the beginning of 1970 and counting every millisecond since then.
+                        For reference, we're approaching 1.8 trillion.
+                        It's a daunting number to humans, but to a computer it's just subtraction!
+                        As I write this, "now" is 1753373496350, but you won't read it until much later.
+                        How much later?
+                        Easy, just figure out how long it's been since 1970 and subtract my number from yours.
+                        We'll use this same concept in-game, but do the math many times per second instead of once in a lifetime.
+                    </p>
+                    <div class="code-block">
+                        <pre><code>
+    update() {
+        const now = Date.now();
+        let dt = (now - this.gameState.lastUpdate) / 1000;
+        this.gameState.lastUpdate = now;
+        let speedMultiplier = 1.0;
+        if (this.botBattleMode && this.footerManager) {
+            speedMultiplier = this.footerManager.getSpeedMultiplier();
+            dt *= speedMultiplier;
+        }
+                        </code></pre>
+                    </div>   
+                    <p>
+                        Let's break this block into two halves.
+                        The first is what we just discussed, using JavaScript's internal system to get the current time and making a comparison.
+                        To improve the robustness of the system, though, we don't want to assume this comparison will be consistent.
+                        Rather than saying "every second, increment forward one", we'll increase specificity and say "increment forward the amount of time since last measured at a rate of one per second".
+                        This distinction has multiple benefits, but chief among them are that we're now making full use of the 1000 fractional portions of each second.
+                        We've facilitated micro-measurements and allowed logic to be applied with a consistent baseline at a higher rate — instead of seeing things through a strobe light, it has constant vision of the action.
+                        This is called delta time (difference between times) and we shorthand it as "dt" in many of the formulas that make up this game, including this one.            
+                    </p>
+                    <p>
+                        An immediate usage of this feature is the speed multiplier making up the latter half of the code block.
+                        By defining time as a variable, we can now mess with that variable and get different results.
+                        By using "dt" across each formula, we can have this time dilation effect work consistently throughout.
+                        When you increase the speed with this consistent multiplier, not only will the timer count down more quickly, the troops will also move more quickly, and the planets will speed up their troop generation at the same rate.
+                        Keep an eye out for this variable and the way it keeps the system moving in sync regardless of pace.
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>3) TROOP CREATION: </strong>DEVELOP A FORMULA DICTATING A PLANET'S VARIABLE RATE OF PRODUCTION</li>
                     </ul>
                     <p>
                         Neutral planets spawn with a set number of troops which doesn't increase over time, but player-controlled planets produce troops at variable rates.
@@ -177,18 +219,18 @@ generateHumanPlayerPlanets(humanPlayers) {
                     </p> 
                     <div class="code-block">
                         <pre><code>
-PLAYER_TO_PLAYER_DISTANCE: 180,  // players far from each other
-PLAYER_TO_NEUTRAL_DISTANCE: 60,  // players can be closer to neutrals
-NEUTRAL_TO_NEUTRAL_DISTANCE: 40, // neutrals can be quite close to each other
-PLAYER_BORDER_BUFFER: 30,        // players can be somewhat close to edges
-NEUTRAL_BORDER_BUFFER: 10,       // neutrals can be very close to edges
+update(dt) {
+    if (this.owner !== 'neutral') { // player-controlled planets generate new troops continuously
+        this.troops = Math.min(999, this.troops + this.productionRate * dt); // production rate is tied to planet size
+    }
+}
                         </code></pre>
                     </div>  
                     <ul class="feature-list">
-                        <li><strong>3) MOVEMENT: </strong>MOBILIZE BATTALIONS AND DIFFERENTIATE ARRIVAL LOGIC</li>
+                        <li><strong>4) MOVEMENT: </strong>MOBILIZE BATTALIONS AND DIFFERENTIATE ARRIVAL LOGIC</li>
                     </ul>                    
                     <p>
-                        It really just involves determining whether the troops in question belong to the same player, and applying addition or subtraction based on that determination.
+                        This aspect really just involves determining whether the troops in question belong to the same player, and applying addition or subtraction based on that determination.
                         As for troop speed, the original game didn't bother to account for the complexities of orbit, so neither will we to ensure predictability.
                     </p>
                     <div class="code-block">
@@ -212,30 +254,43 @@ processTroopArrival(movement) {
     }
 }
                         </code></pre>
-                    </div>
-                    <ul class="feature-list">
-                        <li><strong>4) xx: </strong>yyyy</li>
-                    </ul>   
-                    <p>
-                        words
-                    </p>
-                                        <div class="code-block">
-                        <pre><code>
-bunch of code goes here
-                        </code></pre>
-                    </div>                     
+                    </div>                  
                     <ul class="feature-list">
                         <li><strong>5) PLAYER INPUT: </strong>GIVING HUMANS A FIGHTING CHANCE</li>
                     </ul>
                     <p>
-                        click, double-click, selection box, right now troops are kamikaze but old game wasn't, intensity slider, etc
+                        Tense Galcon games had a tendency to get quite frantic, with troops being dispatched multiple times per second when a point of weakness presented itself.
+                        We'll need a system responsive enough to account for this, and thorough enough to maximize options when things are tense.
+                        First things first, human players need to be able to select their planet.
                     </p>
                     <div class="code-block">
                         <pre><code>
-bunch of code goes here
+click code
                         </code></pre>
                     </div> 
-                    <h3>Finalizing the Playable Game</h3>
+                    <p>
+                        A single click selects their planet, and the next one they click in dispatches troops in that direction.
+                        Clicking a blank space deselects all, giving players the option to cancel an action.
+                        Double-clicking a planet selects all planets the player controls, and I've also implemented a drag-and-drop box for when you want something in-between.
+                        I've also implemented the ability to send only as many troops as you want via an intensity slider, but we'll revisit that a bit later.
+                    </p>
+                    <div class="code-block">
+                        <pre><code>
+extra UI code
+                        </code></pre>
+                    </div> 
+                    <h3>Polishing and Preparations</h3>
+                    <p>
+                        There are a couple fun features I dreamt up while working on the bones, and I think they'll improve the user experience for the better.
+                    </p>
+                    <ul class="feature-list">
+                        <li><strong>1) REAL-TIME STATS: </strong></li>
+                    </ul>
+                    <p>
+                        I got the idea to replace the header with a real-time tracking of troops in-game, and tried a couple of approaches before landing on what's in-game now.
+                        Since each player is assigned a number, 1 up to 6, we can easily arrange them in that same configuration in the header, and colour code them appropriately.
+                        From there it's division
+                    </p>
                     <p>
                         Once the above is written, we can discuss for-fun features like the tracking bar and footer speed/allocation, how everything comes together, etc.
                     </p>
