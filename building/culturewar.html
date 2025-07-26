@@ -79,129 +79,73 @@
                     <div class="code-block">
                         <pre><code>
 this.config = {
-    STARTING_PLANET_SIZE: 30,
-    PLAYER_TO_NEUTRAL_DISTANCE: 60,
-    NEUTRAL_TO_NEUTRAL_DISTANCE: 40,
-    PLANET_DENSITY: 1.0,
-
-    PLAYER_TO_PLAYER_DISTANCE: 180,  // players far from each other
-    PLAYER_TO_NEUTRAL_DISTANCE: 60,  // players can be closer to neutrals
-    NEUTRAL_TO_NEUTRAL_DISTANCE: 40, // neutrals can be quite close to each other
-    PLAYER_BORDER_BUFFER: 30,        // players can be somewhat close to edges
-    NEUTRAL_BORDER_BUFFER: 10,       // neutrals can be very close to edges
+    STARTING_PLANET_SIZE: 30,       // each players gets the same start
+    PLAYER_TO_NEUTRAL_DISTANCE: 60, // players are given a buffer space
 };
-                            
-
                         </code></pre>
                     </div>
                     <p>
-                        Once these guardrails are in place, we can design the order and methodology for planet placement.
-                        The starting planets for each player are the logical jumping-off point, so we'll prioritize those and worry about neutral planets afterwards.
+                        Once these guardrails are in place, we can place the starting planets for each player.
+                        We'll divide the available area into a number of sections equal to number of participants.
                     </p>     
                     <div class="code-block">
                         <pre><code>
-generateHumanPlayerPlanets(humanPlayers) {
-    const planets = [];
-    const width = this.canvas.width;
-    const height = this.canvas.height;
-    // Divide the map into quadrants
-    const quadrants = [
-        { minX: 0, maxX: width/2, minY: height/2, maxY: height },   // Bottom left
-        { minX: width/2, maxX: width, minY: 0, maxY: height/2 },    // Top right
-        { minX: 0, maxX: width/2, minY: 0, maxY: height/2 },        // Top left
-        { minX: width/2, maxX: width, minY: height/2, maxY: height } // Bottom right
-    ];
-    // For each human player, select a random quadrant and position
-    for (let i = 0; i < humanPlayers.length; i++) {
-        const player = humanPlayers[i];
-        // Select a random quadrant (prefer bottom left for first human player)
-        const quadrantIndex = i === 0 ? 0 : Math.floor(Math.random() * quadrants.length);
-        const quadrant = quadrants[quadrantIndex];
-        // Create buffer space from edges (using player-specific border buffer)
-        const buffer = this.config.PLAYER_BORDER_BUFFER + this.config.STARTING_PLANET_SIZE;
-        // Find a valid position within the quadrant
-        let x, y, valid = false, attempts = 0;
-        while (!valid && attempts < this.config.MAX_ATTEMPTS) {
-            // Generate position with some randomness but biased toward the center of the quadrant
-            const quadrantCenterX = (quadrant.minX + quadrant.maxX) / 2;
-            const quadrantCenterY = (quadrant.minY + quadrant.maxY) / 2;
-            // Get random position with bias toward quadrant center (60% toward center, 40% random)
-            const centerBias = 0.6;
-            x = quadrant.minX + buffer + (Math.random() * centerBias + (1 - centerBias) * 0.5) * 
-                (quadrant.maxX - quadrant.minX - buffer * 2);
-            y = quadrant.minY + buffer + (Math.random() * centerBias + (1 - centerBias) * 0.5) * 
-                (quadrant.maxY - quadrant.minY - buffer * 2);
-            valid = this.isValidPlayerPosition(x, y, this.config.STARTING_PLANET_SIZE, planets);
-            attempts++;
-        }
-        if (valid) {
-            const playerPlanet = new Planet(
-                x, y,
-                this.config.STARTING_PLANET_SIZE,
-                this.config.STARTING_TROOPS,
-                player.id,
-                this.game
-            );
-            planets.push(playerPlanet);
-            // Remove the used quadrant from options
-            quadrants.splice(quadrantIndex, 1);
-        } else {
-            console.warn('Could not place human player planet in valid position');
-            // Fallback to a safe position
-            const fallbackX = quadrant.minX + (quadrant.maxX - quadrant.minX) / 2;
-            const fallbackY = quadrant.minY + (quadrant.maxY - quadrant.minY) / 2;
-            const playerPlanet = new Planet(
-                fallbackX, fallbackY,
-                this.config.STARTING_PLANET_SIZE,
-                this.config.STARTING_TROOPS,
-                player.id,
-                this.game
-            );
-            planets.push(playerPlanet);
+generatePlayerPlanets(players) {
+    const playerPlanets = [];
+    const playerCount = players.length;
+    const { width, height } = this.canvas;
+    const planetSize = this.config.STARTING_PLANET_SIZE;
+    const cols = Math.ceil(Math.sqrt(playerCount));
+    const rows = Math.ceil(playerCount / cols);
+    const cellWidth = width / cols;
+    const cellHeight = height / rows;
+    let chunks = [];
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            chunks.push({
+                x: c * cellWidth,
+                y: r * cellHeight,
+                width: cellWidth,
+                height: cellHeight
+            });
         }
     }
-    return planets;
-}
                         </code></pre>
                     </div>
                     <p>
-                        To ensure that competitors have the richest vein of possible options, we'll attempt to assign each a compartmentalized personal chunk of the available space.
-                        A player is assigned a quadrant, then a series of checks are run until eligible coordinates are found.
-                        Once we've placed that player's planet, we move on to the next player.
-                        When everyone's positioned, we add the neutral planets using a similar (more random) process.
+                        We randomly assign players to these sections, and ensure a rich vein of possible options by populating the remaining map space with varied formations of neutral planets.
                     </p>
                     <ul class="feature-list">
                         <li><strong>2) DELTA TIME: </strong>RELATIVITY REQUIRES A FOUNDATIONAL UNIT OF MEASUREMENT</li>
                     </ul>   
                     <p>
-                        If we're going to implement a timer on the game, we need to define time in a quantifiable way.
-                        Luckily JavaScript has a built-in system for this, and it works by starting at the beginning of 1970 and counting every millisecond since then.
-                        For reference, we're approaching 1.8 trillion.
-                        It's a daunting number to humans, but to a computer it's just subtraction!
+                        If we're going to implement an in-game timer, we need to define time in a quantifiable way.
+                        Luckily JavaScript has a built-in system for this that works by starting at the beginning of 1970 and counting every millisecond since then.
+                        For reference, we're approaching 1.8 trillion — an intimidating for humans, but computers manage it easily.
                         As I write this, "now" is 1753373496350, but you won't read it until much later.
                         How much later?
                         Easy, just figure out how long it's been since 1970 and subtract my number from yours.
-                        We'll use this same concept in-game, but do the math many times per second instead of once in a lifetime.
+                        We'll apply this same approach in-game, but do the math many times per second instead of just once.
                     </p>
                     <div class="code-block">
                         <pre><code>
-    update() {
-        const now = Date.now();
-        let dt = (now - this.gameState.lastUpdate) / 1000;
-        this.gameState.lastUpdate = now;
-        let speedMultiplier = 1.0;
-        if (this.botBattleMode && this.footerManager) {
-            speedMultiplier = this.footerManager.getSpeedMultiplier();
-            dt *= speedMultiplier;
-        }
+update() {
+    const now = Date.now();
+    let dt = (now - this.gameState.lastUpdate) / 1000;
+    this.gameState.lastUpdate = now;
+    let speedMultiplier = 1.0;
+    if (this.botBattleMode && this.footerManager) {
+        speedMultiplier = this.footerManager.getSpeedMultiplier();
+        dt *= speedMultiplier;
+    }
                         </code></pre>
                     </div>   
                     <p>
                         Let's break this block into two halves.
-                        The first is what we just discussed, using JavaScript's internal system to get the current time and making a comparison.
-                        To improve the robustness of the system, though, we don't want to assume this comparison will be consistent.
+                        The first is uses JavaScript's system to get the current time and make a comparison.
+                        To improve the robustness of the system, though, we don't want to assume this will be consistent.
                         Rather than saying "every second, increment forward one", we'll increase specificity and say "increment forward the amount of time since last measured at a rate of one per second".
-                        This distinction has multiple benefits, but chief among them are that we're now making full use of the 1000 fractional portions of each second.
+                        This distinction has multiple benefits, but chief among them is we're now making full use of the 1000 fractional portions of each second.
                         We've facilitated micro-measurements and allowed logic to be applied with a consistent baseline at a higher rate — instead of seeing things through a strobe light, it has constant vision of the action.
                         This is called delta time (difference between times) and we shorthand it as "dt" in many of the formulas that make up this game, including this one.            
                     </p>
@@ -213,7 +157,7 @@ generateHumanPlayerPlanets(humanPlayers) {
                         Keep an eye out for this variable and the way it keeps the system moving in sync regardless of pace.
                     </p>
                     <ul class="feature-list">
-                        <li><strong>3) TROOP CREATION: </strong>DEVELOP A FORMULA DICTATING A PLANET'S VARIABLE RATE OF PRODUCTION</li>
+                        <li><strong>3) TROOP CREATION: </strong>FORMULA DICTATING A PLANET'S VARIABLE RATE OF PRODUCTION</li>
                     </ul>
                     <p>
                         Neutral planets spawn with a set number of troops which doesn't increase over time, but player-controlled planets produce troops at variable rates.
