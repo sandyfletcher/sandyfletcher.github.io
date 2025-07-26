@@ -14,7 +14,7 @@
                     <h1>Project Showcase: [CULTURE WAR]</h1>
                     <div class="project-meta">
                         <span class="project-date">April 2025</span>
-                        <span class="project-tags">HTML / CSS / JavaScript / Python</span>
+                        <span class="project-tags">HTML / CSS / JavaScript</span>
                     </div>
                 </header>
                 <section class="project-overview">
@@ -25,69 +25,73 @@
                 <section class="project-details">
                     <h3>Inspiration</h3>
                     <p>
-                        There's something very special about moving out, living unencumbered by the parental supervision perpetually around your neck from the day you're born.
-                        It's common for people to use it as an opportunity to let loose, eating ice cream for breakfast and liquor for lunch.
-                        I used this absence of oversight to allocate a larger chunk of my day to computer games.
+                        There's something very special about moving out, living unencumbered by the parental albatross you've worn as a turtleneck since birth.
+                        Typically, it's an opportunity for people to let loose, eating ice cream for breakfast and liquor for lunch.
+                        I used the absence of oversight to allocate a larger chunk of my day to computer games.
                     </p>
                     <p>
                         If someone said that time was wasted, they'd only be mostly right.
-                        Imagine a critic admitting they'd only seen a handful of movies prior to getting this movie-reviewing job... would it be reasonable to question the value of their insights?
-                        How could they possibly analyze the peaks and valleys of film as a medium when they've only dipped their toe in one part of the river?
-                        Surely someone who spent the majority of their day immersed in various games, discussing their intricacies, would've gleaned more, right?
-                        Well, fingers crossed.
-                    </p>
+                        Imagine a movie critic who's only seen a handful of movies — would their insights have any depth?
+                        Well, I've spent my time in the digital trenches, side-by-side with my roommates as we ruined our postures hunched over laptops.
+                        Recently I found myself reminiscing on this period, living in squalor but loving it, and a particular favourite game of ours game to mind: Galcon.
                     <p>
-                        A couple months back I found myself reminiscing about this period, living in squalor but loving it, and a particular game came to mind — Galcon (short for "Galactic Conquest").
-                        It was an online multiplayer space battle, akin to Risk but in real-time, and our frat-without-the-weird-stuff household frequently hosted these celestial throwdowns.
-                        At the time I gave it little thought, but in retrospect the website worked really well.
-                        There was an abundance of players, matchmaking was speedy, and the game had nailed that addictive balance between skill and luck.
+                        Short for "Galactic Conquest", it was an online multiplayer space battle, akin to Risk but in real-time.
+                        At the time I gave it little thought, but the website worked really well.
+                        There was an abundance of players, matchmaking was speedy, and the gameplay nailed that addictive balance between skill and luck.
                         Unfortunately for us the game's popularity eventually ended up making it less accessible, and only years later do I understand why.
                     </p>
                     <p>
                         The adage "there's no such thing as a free lunch" is the easiest way to understand something ostensibly permanent like a website slipping out of existence.
-                        Computers use electricity, and typically there's a cost to acquiring that electricity.
-                        When you access a website, you're essentially asking for info off someone else's computer, and they're the ones who pick up the tab to process your request.
-                        If all you're requesting is a tiny bit of data like today's temperature reading, that's not a very large bill, but Galcon was serving hundreds of concurrent users, and those users were requesting a low-latency game against opponents around the world instead of a two-digit number.
-                        The developers chose to pivot from the website we loved to an app with an initial purchase cost, an approach which would easily offset the anticipated computing costs and give them some short-term operational flexibility.
-                        It's a logical decision, but it's one that inevitably curtails the number of new players discovering the game moving forward, and the march towards obscurity is much quicker when the landscape is one of downhill trends.
+                        Computers use electricity, and acquiring that electricity has a cost.
+                        When you access a website, you're essentially asking to access someone else's computer, and they're the ones who pick up the tab to process your request.
+                        If all you're requesting is a tiny bit of data like today's temperature, that won't be a very large bill, but Galcon was serving hundreds of concurrent users — users requesting a low-latency game against opponents around the world, not a two-digit number.
+                        The developers chose to pivot from the website we loved to an app with an initial purchase cost, an approach which would offset the computing costs and provide some operational flexibility.
+                        It's a logical decision, but one that inevitably curtails the number of new players discovering the game moving forward, and the march towards obscurity is much quicker in a landscape of downhill trends.
                     </p>
                     <p>
                         This project intends to reignite interest and evaluate whether Galcon has the strategic depth worthy of joining Chess, Go, and DoTA2 as an AI battleground.
                         I'll begin by attempting to recreate the game as faithfully as possible, ideally so that someone who's never experienced it can get caught up and enjoy the action.
-                        From there I'll convert it into an arena for LLMs to test their mettle, pitting various models against one another as another data point in our attempt to benchmark intelligence.
-                        That will likely be the extent of the project, but if the results are intriguing I may use this as an avenue to investigate machine learning and attempt to craft the ultimate pilot for galactic conquest.
+                        From there I'll convert it into an arena for LLMs to test their mettle, asking frontier models to generate their own battlebot and pitting them against each other as another data point in our collective attempt to benchmark intelligence.
+                        That will likely be the extent of the project, but if the results are intriguing I may use this as an avenue to investigate machine learning and attempt to craft the ultimate pilot for galactic conquest... for self-defense of course!
                     </p>
                     <h3>Initial Steps</h3>
                     <p>
-                        At this point in my coding journey I don't have those complex tools at my disposal.
-                        The only programming language I'm familiar with capable of making conditional choices is JavaScript, so that'll be what powers both the game architecture and the robot opponents within.
-                        Since I plan to have this be a website rather than a locally-running program, I started by setting up a shell that holds the site contents using HTML and CSS.
-                        For simplicity's sake, I've arranged it to be inflexible, in the sense that it'll essentially display the same on web as on mobile, and it won't compatible with landscape mode.
-                        As you can probably deduce from the site you're reading and the look of the game itself, I'm partial to minimalism.
-                        The aesthetics may only be a personal preference, but from a practical perspective fewer distractions means people understand how to proceed more intuitively, so if something's onscreen let's try to ensure it has a clear purpose.
+                        At this point in my coding journey I don't have sophiticated tools at my disposal.
+                        The only programming language I'm familiar with capable of conditional choices is JavaScript, so that'll be what powers both the arena architecture and the battlebots within.
+                        I set up a basic website to hold the site content using HTML and CSS, and for simplicity's sake I've made it inflexible in the sense that it'll display essentially the same on web as mobile and won't be compatible with landscape mode.
+                        I've gone with a minimalist aesthetic mostly as personal preference, but fewer distractions helps users understand how to proceed more intuitively.
+                        If something's on-screen, let's ensure it has a clear purpose.
                     </p>
                     <p>
-                        After setting up menus, fiddling with fonts, and ensuring there's visual consistency across platforms and viewport sizes, we're ready to conceptualize how to recreate the game itself.
-                        The crux of the gameplay is that planets generate troops at a rate relative to their physical size, and these troops can be dispatched to neighbouring planets to secure new planets that produce even more troops.
-                        Naturally, some planets become contested as multiple players vie for its production capabilities, and troops are traded through mutual attrition.
-                        Victory is achieved when one player has completely eliminated all opposing players, or given to the player in the dominant position (most planets controlled) when the timer runs out.
-                        From a coding perspective, a lot of this is surprisingly simple when broken down into smaller components.  We'll need: 
+                        After applying this philosophy to the menus, fiddling with fonts, and ensuring there's visual consistency across platforms and viewport sizes, we're ready to conceptualize recreating the game itself.
+                        The core of the gameplay is that planets generate troops at a rate relative to their size, and these troops can be dispatched to neighbouring planets to seize control.
+                        Naturally, some planets become contested as players vie for their production capabilities, and troops in combat are traded through mutual attrition.
+                        Victory is achieved when one player has completely eliminated the opposition, or given to the player with control over the most planets when the timer runs out.
+                        From a coding perspective, a lot of this is surprisingly simple when broken down into smaller components.  We're going to need: 
                     </p>
                     <ul class="feature-list">
-                        <li><strong>1) MAP GENERATION: </strong>POPULATE THE GAME AREA WITH A SEMI-RANDOM DISTRIBUTION OF PLANETS</li>
+                        <li><strong>1) MAP GENERATION: </strong>POPULATE THE BATTLEFIELD WITH A SEMI-RANDOM DISTRIBUTION OF PLANETS</li>
                     </ul>
                     <p>
-                        Setting up a uniform aspect ratio across all viewports greatly simplifies this step.
-                        No need to worry about viewport scaling formulas keeping aspect ratios intact; we'll simply dictate distances with integers.
-                        When our algorithm moves through empty space on the map and considers placing a planet, it'll refer to these constants to make sure it won't overlap with something already occupying that area.
+                        Setting up a uniform aspect ratio across all viewports greatly simplified this step.
+                        Instead of worrying about scaling formulas, we can dictate distance with integers and prevent overlap.
                     </p>           
                     <div class="code-block">
                         <pre><code>
-PLAYER_TO_PLAYER_DISTANCE: 180,  // players far from each other
-PLAYER_TO_NEUTRAL_DISTANCE: 60,  // players can be closer to neutrals
-NEUTRAL_TO_NEUTRAL_DISTANCE: 40, // neutrals can be quite close to each other
-PLAYER_BORDER_BUFFER: 30,        // players can be somewhat close to edges
-NEUTRAL_BORDER_BUFFER: 10,       // neutrals can be very close to edges
+this.config = {
+    STARTING_PLANET_SIZE: 30,
+    PLAYER_TO_NEUTRAL_DISTANCE: 60,
+    NEUTRAL_TO_NEUTRAL_DISTANCE: 40,
+    PLANET_DENSITY: 1.0,
+
+    PLAYER_TO_PLAYER_DISTANCE: 180,  // players far from each other
+    PLAYER_TO_NEUTRAL_DISTANCE: 60,  // players can be closer to neutrals
+    NEUTRAL_TO_NEUTRAL_DISTANCE: 40, // neutrals can be quite close to each other
+    PLAYER_BORDER_BUFFER: 30,        // players can be somewhat close to edges
+    NEUTRAL_BORDER_BUFFER: 10,       // neutrals can be very close to edges
+};
+                            
+
                         </code></pre>
                     </div>
                     <p>
