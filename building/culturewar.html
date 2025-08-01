@@ -121,11 +121,11 @@ generatePlayerPlanets(players) {
                     <p>
                         If we're going to implement an in-game timer, we need to define time in a quantifiable way.
                         Luckily JavaScript has a built-in system for this that works by starting at the beginning of 1970 and counting every millisecond since then.
-                        For reference, we're approaching 1.8 trillion — an intimidating for humans, but computers manage it easily.
+                        For reference, we're approaching 1.8 trillion — an intimidating number for humans, but computers manage it easily.
                         As I write this, "now" is 1753373496350, but you won't read it until much later.
                         How much later?
                         Easy, just figure out how long it's been since 1970 and subtract my number from yours.
-                        We'll apply this same approach in-game, but do the math many times per second instead of just once.
+                        This math is the same approach we take in-game, but we do it many times per second.
                     </p>
                     <div class="code-block">
                         <pre><code>
@@ -141,6 +141,10 @@ update() {
                         </code></pre>
                     </div>   
                     <p>
+                        
+                        To maximize 
+                        
+                        
                         Let's break this block into two halves.
                         The first is uses JavaScript's system to get the current time and make a comparison.
                         To improve the robustness of the system, though, we don't want to assume this will be consistent.
@@ -320,8 +324,8 @@ standardized prompt and how they asked to have it fed to them
                     </p>
                 </section>
                 <footer class="project-footer">
-                    <a href="https://situational.sandyfletcher.ca" class="project-link" target="_blank" rel="noopener noreferrer">View Live Project →</a>
-                    <a href="https://github.com/sandyfletcher/situational" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+                    <a href="https://culturewar.sandyfletcher.ca" class="project-link" target="_blank" rel="noopener noreferrer">View Live Project →</a>
+                    <a href="https://github.com/sandyfletcher/culturewar" class="project-link" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
                 </footer>
             </article>
         </main>
