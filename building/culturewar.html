@@ -13,7 +13,7 @@
                 <header class="project-header">
                     <h1>Project Showcase: [CULTURE WAR]</h1>
                     <div class="project-meta">
-                        <span class="project-date">April 2025</span>
+                        <span class="project-date">August 2025</span>
                         <span class="project-tags">HTML / CSS / JavaScript</span>
                     </div>
                 </header>
@@ -78,23 +78,24 @@
                     </p>           
                     <div class="code-block">
                         <pre><code>
-this.config = {
-    STARTING_PLANET_SIZE: 30,       // each players gets the same start
-    PLAYER_TO_NEUTRAL_DISTANCE: 60, // players are given a buffer space
+export const config = {
+    planetGeneration: {
+        startingPlanetSize: 30, // each player gets the same start
+        playerToNeutralDistance: 60, // minimum distance between player and neutral planet
+    },
 };
                         </code></pre>
                     </div>
                     <p>
                         Once these guardrails are in place, we can place the starting planets for each player.
-                        We'll divide the available area into a number of sections equal to number of participants.
+                        We'll divide the available area into a number of sections equal to number of participants, shuffle them, and assign one to each player.
+                        This makes for a varied but fair starting position each time we boot up the game.
                     </p>     
                     <div class="code-block">
                         <pre><code>
 generatePlayerPlanets(players) {
-    const playerPlanets = [];
     const playerCount = players.length;
     const { width, height } = this.canvas;
-    const planetSize = this.config.STARTING_PLANET_SIZE;
     const cols = Math.ceil(Math.sqrt(playerCount));
     const rows = Math.ceil(playerCount / cols);
     const cellWidth = width / cols;
@@ -110,6 +111,8 @@ generatePlayerPlanets(players) {
             });
         }
     }
+    this._shuffleArray(chunks);
+}
                         </code></pre>
                     </div>
                     <p>
@@ -131,20 +134,19 @@ generatePlayerPlanets(players) {
                         <pre><code>
 update() {
     const now = Date.now();
-    let dt = (now - this.gameState.lastUpdate) / 1000;
+    const rawDt = (now - this.gameState.lastUpdate) / 1000;
     this.gameState.lastUpdate = now;
     let speedMultiplier = 1.0;
-    if (this.botBattleMode && this.footerManager) {
+    if (this.config.isHeadless) {
+        speedMultiplier = 100.0;
+    } else if (this.footerManager && this.footerManager.mode === 'speed') {
         speedMultiplier = this.footerManager.getSpeedMultiplier();
-        dt *= speedMultiplier;
     }
+    const totalGameDt = rawDt * speedMultiplier;
+}
                         </code></pre>
                     </div>   
                     <p>
-                        
-                        To maximize 
-                        
-                        
                         Let's break this block into two halves.
                         The first is uses JavaScript's system to get the current time and make a comparison.
                         To improve the robustness of the system, though, we don't want to assume this will be consistent.
@@ -161,7 +163,7 @@ update() {
                         Keep an eye out for this variable and the way it keeps the system moving in sync regardless of pace.
                     </p>
                     <ul class="feature-list">
-                        <li><strong>3) TROOP CREATION: </strong>FORMULA DICTATING A PLANET'S VARIABLE RATE OF PRODUCTION</li>
+                        <li><strong>3) TROOP CREATION: </strong>A FORMULA FOR PRODUCTION</li>
                     </ul>
                     <p>
                         Neutral planets spawn with a set number of troops which doesn't increase over time, but player-controlled planets produce troops at variable rates.
@@ -172,36 +174,35 @@ update() {
                     <div class="code-block">
                         <pre><code>
 update(dt) {
-    if (this.owner !== 'neutral') { // player-controlled planets generate new troops continuously
-        this.troops = Math.min(999, this.troops + this.productionRate * dt); // production rate is tied to planet size
+    if (this.owner !== 'neutral') {
+        const maxTroops = config.planet.maxTroops;
+        this.troops = Math.min(maxTroops, this.troops + this.productionRate * dt);
     }
 }
                         </code></pre>
                     </div>  
                     <ul class="feature-list">
-                        <li><strong>4) MOVEMENT: </strong>MOBILIZE BATTALIONS AND DIFFERENTIATE ARRIVAL LOGIC</li>
+                        <li><strong>4) MOVEMENT & COMBAT: </strong>THE LOGIC OF CONFLICT</li>
                     </ul>                    
                     <p>
-                        This aspect really just involves determining whether the troops in question belong to the same player, and applying addition or subtraction based on that determination.
-                        As for troop speed, the original game didn't bother to account for the complexities of orbit, so neither will we to ensure predictability.
+                        When a fleet arrives at its destination, the logic is straightforward: if the planet's owner matches the fleet's owner, it's a reinforcement. If not, it's a battle. Combat is a simple 1-for-1 attrition. If the attacker has more troops than the defender, they conquer the planet.
                     </p>
                     <div class="code-block">
                         <pre><code>
 processTroopArrival(movement) {
     const targetPlanet = movement.to;
-    if (targetPlanet.owner === movement.owner) { // reinforcing
+    if (targetPlanet.owner === movement.owner) {
         targetPlanet.troops += movement.amount;
-    } else { // attacking
-        const previousTroops = targetPlanet.troops;
+    } else {
+        const defenderTroops = targetPlanet.troops;
         targetPlanet.troops -= movement.amount;
-        const defenderLosses = Math.min(previousTroops, movement.amount); // calculate troops lost (both sides)
-        const attackerLosses = targetPlanet.troops < 0 ? 0 : movement.amount;
-        this.gameState.incrementTroopsLost(defenderLosses); // track losses for statistics
-        this.gameState.incrementTroopsLost(attackerLosses);
-        if (targetPlanet.troops < 0) { // capture planet if troops < 0
+        if (targetPlanet.troops < 0) {
+            this.gameState.incrementTroopsLost(defenderTroops);
             targetPlanet.owner = movement.owner;
             targetPlanet.troops = Math.abs(targetPlanet.troops);
-            this.gameState.incrementPlanetsConquered(); // update game state for statistics
+            this.gameState.incrementPlanetsConquered();
+        } else {
+            this.gameState.incrementTroopsLost(movement.amount);
         }
     }
 }
@@ -217,7 +218,15 @@ processTroopArrival(movement) {
                     </p>
                     <div class="code-block">
                         <pre><code>
-click code
+processClick(x, y) {
+    const clickedPlanet = this.game.planets.find(p => p.containsPoint(x, y));
+    const now = Date.now();
+    if (clickedPlanet && clickedPlanet === this.lastClickTarget && (now - this.lastClickTime < this.doubleClickTimeThreshold)) {
+        eventManager.emit('planet-double-clicked', clickedPlanet);
+    } else {
+        eventManager.emit('click', { x, y, target: clickedPlanet });
+    }
+}
                         </code></pre>
                     </div> 
                     <p>
@@ -226,11 +235,6 @@ click code
                         Double-clicking a planet selects all planets the player controls, and I've also implemented a drag-and-drop box for when you want something in-between.
                         I've also implemented the ability to send only as many troops as you want via an intensity slider, but we'll revisit that a bit later.
                     </p>
-                    <div class="code-block">
-                        <pre><code>
-extra UI code
-                        </code></pre>
-                    </div> 
                     <h3>Polishing and Preparations</h3>
                     <p>
                         There are a couple fun features I dreamt up while working on the bones, and I think they'll improve the user experience for the better.
@@ -247,7 +251,19 @@ extra UI code
                     </p>
                     <div class="code-block">
                         <pre><code>
-troop tracking code
+update() {
+    // Calculate totalTroops and playerTroops for all players
+    for (const playerId of orderedPlayerIds) {
+        if (playerTroops[playerId] > 0) {
+            const percentage = (playerTroops[playerId] / totalTroops) * 100;
+            const segment = document.createElement('div');
+            segment.className = 'troop-bar-segment';
+            segment.style.width = `${percentage}%`;
+            segment.style.backgroundColor = this.playerColors[playerId];
+            this.barSegmentsContainer.appendChild(segment);
+        }
+    }
+}
                         </code></pre>
                     </div> 
                     <ul class="feature-list">
@@ -261,7 +277,15 @@ troop tracking code
                     </p>                        
                     <div class="code-block">
                         <pre><code>
-slider bar code
+updateSliderUI(percent) {
+    label.textContent = (this.mode === 'troop') ? 'TROOP %' : 'PACE';
+    if (this.mode === 'troop') {
+        valueDisplay.textContent = `${percent}%`;
+    } else {
+        const speedMultiplier = this.getSpeedMultiplier();
+        valueDisplay.textContent = `${speedMultiplier.toFixed(1)}X`;
+    }
+}
                         </code></pre>
                     </div>     
                     <ul class="feature-list">
@@ -289,7 +313,14 @@ percentage dispatch code
                     </p>
                     <div class="code-block">
                         <pre><code>
-example function summarizing API value
+predictPlanetState(planet, timeInFuture) {
+    let predictedTroops = planet.troops;
+    let predictedOwner = planet.owner;
+    predictedTroops += this.getPlanetProductionRate(planet) * timeInFuture;
+    const arrivingFleets = this.game.troopMovements.filter(/* ... */);
+    for (const fleet of arrivingFleets) { /* ... */ }
+    return this.createReadOnlyProxy({ owner: predictedOwner, troops: predictedTroops });
+}
                         </code></pre>
                     </div>    
                     <p>
@@ -299,28 +330,163 @@ example function summarizing API value
                         All we can do is decide on a priority list and feed as much to the model as they're able to consume.
                         At a minimum, we'll be able to show them the API file and a standardized prompt describing what we want them to output:
                     </p>
-                    <div class="code-block">
+                    <details class="collapsible-prompt">
+                        <summary>View the Standardized AI Bot Prompt</summary>
+                        <div class="prompt-content">
+                        <div class="code-block">
                         <pre><code>
-standardized prompt and how they asked to have it fed to them
+Your Mission: Design a Champion AI Bot
+Your task is to design and implement a high-performance AI bot for a real-time strategy game based on "Galcon." Your bot will compete in an arena against a diverse field of other AIs.
+The goal is not merely to participate but to dominate, so design a bot that is robust, adaptive, and strategically superior.
+
+IMPORTANT CONCEPTS:
+Time Scaling: The dt parameter in makeDecision(dt) is pre-scaled by the game speed. If a game runs at 4x speed, dt will be four times larger. All time-based API functions work with this scaled time.
+Cooldowns: The game enforces a strict "one action, then wait a half-second" cooldown. You get one chance to return a valid move, and then you must wait for the cooldown period to elapse before you can act again.
+Planet Capacity: Planets have a maximum capacity of 999 troops. You cannot hoard more than this on a single planet.
+Return Format: Your makeDecision method must return planet id strings, not full objects.
+The Arena: Your bot may be tested in high-speed simulations, so ensure your logic is not based around human reaction times.
+
+CORE GAME MECHANICS:
+Objective: Eliminate all opponents by conquering their planets. The game ends when only one player (or team) remains, or when the 5-minute timer runs out.
+Time-Out Victory: If the timer expires, the winner is the player controlling the most planets. Total troops serves as the tiebreaker.
+Planets & Production: Player-owned planets generate "troops" at a rate proportional to their size. Neutral planets do not produce troops. Planets cannot hold more than 999 troops.
+Fleets & Conquest: You can send fleets of troops from your planets to any other planet.
+Reinforcement: Fleets arriving at a friendly planet add to its troop count.
+Conquest: Fleets arriving at an enemy or neutral planet engage in a 1-for-1 battle. If the attacking fleet is larger than the defending garrison, it conquers the planet, and the remaining troops become the new garrison.
+
+YOUR TASK & CRITICAL RULES
+Deliverable: A single, self-contained JavaScript file named [YourModel].js.
+Inheritance: Your class must extend the BaseBot class.
+Imports: Your file must have only one import: import BaseBot from './BaseBot.js';.
+Logic Core: All decision-making logic must be inside the makeDecision(dt) method.
+CRITICAL RULE #1: Read-Only Game State
+To ensure fair competition, your bot has read-only access to the game world. You cannot directly modify objects from the API.
+ILLEGAL: const target = this.api.getEnemyPlanets()[0]; target.troops = 0; // This will fail.
+LEGAL (for simulation): const target = this.api.getEnemyPlanets()[0]; const simulatedTarget = { ...target }; simulatedTarget.troops = 0; // This is safe.
+CRITICAL RULE #2: Decision Object Format
+Your decision to send a fleet MUST use planet IDs, not the full objects. Returning the full object instead of the ID string is a common error that will prevent your bot from functioning correctly.
+CORRECT: return { fromId: "p-5", toId: "p-10", troops: 50 };
+INCORRECT: return { from: myPlanetObj, to: enemyPlanetObj, troops: 50 };
+
+DATA STRUCTURES:
+The API will provide objects with the following structures:
+Planet Object:
+{
+    id: "p-12", // STRING: Unique and stable identifier. USE THIS for decisions.
+    x: 150.7, // NUMBER: X-coordinate.
+    y: 300.2, // NUMBER: Y-coordinate.
+    size: 25, // NUMBER: Radius. Affects production rate.
+    troops: 45.8, // NUMBER: Current troops (can be a float).
+    owner: "player1", // STRING: The ID of the owning player ('neutral' if unowned).
+    productionRate: 1.25 // NUMBER: Troops generated per second. Read-only.
+}
+TroopMovement Object (Fleet):
+{
+    from: Planet, // OBJECT: The origin Planet object.
+    to: Planet, // OBJECT: The destination Planet object.
+    amount: 30, // NUMBER: The number of troops in the fleet.
+    owner: "player2", // STRING: The ID of the player who sent the fleet.
+    duration: 4.5 // NUMBER: The remaining time in seconds until arrival.
+}
+
+MASTER THE GameAPI — YOUR SENSES AND INTEL:
+this.api is your window into the game. Use it to build your strategy.
+
+== General Game Info ==
+getElapsedTime(): Time in seconds since the game started.
+getGameDuration(): Total game duration in seconds (usually 300).
+getGamePhase(): Current phase: 'EARLY', 'MID', or 'LATE'.
+getDecisionCooldown(): Returns the time (e.g., 0.5s) you must wait between actions. The engine enforces a "one move, then wait" policy. Prioritize your most impactful move each turn.
+getMapInfo(): Returns {width, height, center: {x, y}}.
+
+== Planet & Fleet Data ==
+getAllPlanets(): All planets.
+getMyPlanets(): Planets you own.
+getEnemyPlanets(): Planets owned by opponents.
+getNeutralPlanets(): Unowned planets.
+getPlanetById(planetId): A specific planet by its ID.
+getAllTroopMovements(): All active fleets.
+getFleetsByOwner(playerId): All fleets sent by a specific player.
+getIncomingAttacks(targetPlanet): Enemy fleets heading to one of your planets.
+getIncomingReinforcements(targetPlanet): Friendly fleets heading to one of your planets.
+
+== Your Bot's Identity & Player Data ==
+Your bot's unique player ID is passed into the constructor as the playerId parameter and is stored on this.playerId. You will need this to identify your own planets and fleets. Do not attempt to call a function like this.api.getMyId(), as it does not exist.
+
+INCORRECT: const myId = this.api.getMyId(); // Will cause a game-freezing error!
+CORRECT: const myId = this.playerId;
+
+getAllPlayerIds(): Array of all active player IDs.
+getOpponentIds(): Array of all opponent IDs.
+isPlayerActive(playerId): Checks if a player still has any planets or fleets.
+getPlayerStats(playerId): Very useful. Returns a consolidated stats object: {id, planetCount, totalTroops, totalProduction, isActive}.
+getMyTotalTroops(): Your total troop count across all planets and fleets.
+getMyTotalProduction(): Your total production rate per second.
+getMyStrengthRatio(): Your strength (troops + weighted production) vs. the strongest opponent. > 1.0 suggests you are stronger.
+
+== Strategic Calculation & Prediction ==
+getDistance(planet1, planet2): Direct distance between two planets.
+getTravelTime(planet1, planet2): Fleet flight time between two planets.
+findNearestPlanet(sourcePlanet, targetPlanets): Finds the closest planet to a source from a given list.
+getNearestEnemyPlanet(sourcePlanet): Shortcut to find the closest enemy planet.
+predictPlanetState(planet, timeInFuture): POWERFUL TOOL. Predicts a planet's owner and troop count at a future time, accounting for its production and all currently incoming fleets.
+
+== Advanced Strategic Components ==
+These low-level functions allow you to build custom evaluation logic.
+getPlanetProductionRate(planet): A planet's raw production rate per second.
+getPlanetCentrality(planet): A planet's centrality score (0 to 1, 1 being map center).
+calculatePlanetValue(planet): A generic helper combining size, production, and centrality. Good as a starting point.
+calculateThreat(myPlanet): A generic helper that calculates a threat score for one of your planets based on nearby enemy troops and incoming fleets.
+
+STRATEGIC PHILOSOPHY:
+A winning bot needs a plan.
+State Management: Use this.memory to track long-term goals or states. For example, this.memory.missions could track which planets are already tasked with an attack so you don't over-commit your forces.
+Phased Strategy: Adapt your strategy. Early game may be about rapid expansion. Mid-game could be crippling a key opponent. Late game might be an all-in attack or a defensive consolidation. Use getGamePhase() to guide your logic.
+Custom Intelligence: A champion bot will have its own definition of "value" and "threat." Use the raw data functions (getPlanetProductionRate, getPlanetCentrality, planet.size) to build superior evaluation algorithms.
+Efficiency is Key: Don't just attack; attack with precision. Use predictPlanetState to calculate the exact number of troops needed for a successful conquest (plus a small safety buffer). Wasting troops is a path to defeat.
+
+Use this template as the starting point for your [YourModel].js file.
                         </code></pre>
-                    </div>
+                        </div>
+                        </div>
+                    </details>
                     <p>
                         It's taken some effort, but we've assembled a playable game and the means to recruit players.
                         Let's get ready to rumble!
                     </p>
                     <h3>Meet Your Gladiators</h3>
+                    <p>Below is the current roster of AI combatants. Each was generated by its respective Large Language Model based on the standardized prompt above.</p>
                     <ul class="feature-list">
-                        <li><strong>CLAUDE 3.5</strong></li>
+                        <li><strong>Claude 4 Sonnet</strong>
+                            <p><em>Commissioned:</em> May 2025<br><em>Field Report:</em> An adaptive multi-phase strategist that evolves from aggressive early expansion to strategic consolidation to decisive late-game pushes. It balances calculated risks with defensive discipline, adjusting its aggression based on whether it's winning or losing.</p>
+                        </li>
+                        <li><strong>Gemini 2.5 Pro Series</strong>
+                            <p><em>Commissioned:</em> March 2025<br><em>Field Report:</em> This family of bots generally employs balanced, phase-aware strategies that prioritize robust defense and calculated aggression, though variations exist between models.</p>
+                        </li>
+                        <li><strong>ChatGPT 4o</strong>
+                            <p><em>Commissioned:</em> August 2025<br><em>Field Report:</em> An adaptive, value-driven bot focused on safe expansion, surgical defense, and opportunistic strikes using forward predictions and a phased strategy.</p>
+                        </li>
+                        <li><strong>KimiDev72b</strong>
+                            <p><em>Commissioned:</em> June 2025<br><em>Field Report:</em> A highly reactive bot that automatically adjusts to focus on defense when under attack and aggressive expansion when safe.</p>
+                        </li>
                     </ul>
-                    <p>
-                        
-                    </p>
                     <h3>Lessons Learned</h3>
                     <p>
-                        Conclude with your reflections. What were the biggest challenges? What would you do differently next time? What new skills did you gain? This section is incredibly valuable as it shows growth and critical thinking.
-                    </p>                    
+                        This project was as much an exercise in software architecture as it was in game development. Here are a few key takeaways:
+                    </p>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>The Power of a Read-Only API:</strong> The single biggest challenge in a multi-AI environment is ensuring fairness. Early on, I considered letting bots interact with live game objects, but realized this was a recipe for disaster. A single faulty bot could crash the entire simulation by modifying game state directly. Implementing a read-only `GameAPI` using JavaScript `Proxy` objects was a game-changer. It creates a "hard contract" where bots can *see* everything but *touch* nothing, forcing them to express their intent through a single, validated action. This design pattern was critical for stability and scalability.
+                        </li>
+                        <li>
+                            <strong>Fixed Timesteps are Non-Negotiable:</strong> For a simulation to be deterministic (especially for high-speed batch testing), the logic must be decoupled from the rendering framerate. My implementation of a fixed-timestep game loop (using an `accumulator` and `FIXED_TIME_STEP`) ensures that a game running at 0.1x speed and a game running at 100x speed will produce the *exact same result*. This was essential for fair bot comparisons and performance analysis.
+                        </li>
+                        <li>
+                            <strong>Modularity Breeds Velocity:</strong> The initial versions of the code had logic tangled together. The refactor into distinct, single-responsibility modules (`MenuManager`, `PlayersController`, `FooterManager`, `GameState`, etc.) felt slow at first, but paid massive dividends. When I wanted to add a "Headless Mode" for batch testing, I only needed to modify logic in a few specific places without fear of breaking the renderer or the input handler. This separation of concerns made the entire system more resilient and faster to iterate on.
+                        </li>
+                    </ul>
                     <p>
-                        This would be a perfect segue to a complementary project article showing how to build out the live leaderboards and automate games to pull patterns from the data and crown a heavyweight champion of the galaxy/universe.
+                        The next logical step for this project is to build on the data being collected. With a robust testing arena and a persistent `StatsTracker`, I can now run thousands of automated games to gather data, analyze bot performance, identify dominant strategies, and perhaps even train a bespoke machine learning model to create the ultimate `Culture War` champion.
                     </p>
                 </section>
                 <footer class="project-footer">

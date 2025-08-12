@@ -647,6 +647,41 @@ body {
     opacity: 0.5;
     color: #fff;
 }
+.collapsible-prompt {
+    margin: 2rem 0;
+}
+.collapsible-prompt summary {
+    font-family: 'SpecialElite', sans-serif;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    opacity: 0.85;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    list-style-position: inside;
+    outline: none;
+}
+.collapsible-prompt summary:hover {
+    opacity: 1;
+}
+.collapsible-prompt[open] > summary {
+    margin-bottom: 1rem;
+}
+.collapsible-prompt .prompt-content {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 3px solid rgba(138, 180, 248, 0.5);
+    border-radius: 8px;
+    padding: 1.5rem;
+    animation: fadeIn 0.5s ease-out;
+}
+.collapsible-prompt .prompt-content h4 {
+    margin-top: 0;
+    color: #8ab4f8;
+}
+.collapsible-prompt .prompt-content code {
+    white-space: pre-wrap;
+    word-break: normal;
+    font-size: 0.85rem;
+}
 .project-footer {
     margin-top: 1rem;
     padding-top: 1rem;
