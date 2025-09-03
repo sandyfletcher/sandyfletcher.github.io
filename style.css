@@ -324,8 +324,10 @@ a:hover {
     text-align: left;
     overflow: hidden;
     white-space: nowrap;
+}
+.name-section h1 {
     font-family: var(--font-accent);
-    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-size: clamp(2rem, 6vw, 5rem);
 }
 .link-container {
     display: flex;
