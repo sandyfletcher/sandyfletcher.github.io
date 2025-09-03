@@ -49,11 +49,11 @@ document.addEventListener("DOMContentLoaded", function() {
         const projectCards = document.querySelectorAll('.project-card');
         const projectsGrid = document.querySelector('.projects-grid'); 
         filterControls.addEventListener('click', function(e) {
-            const button = e.target.closest('.filter-btn');
+            const button = e.target.closest('.btn-filter');
             if (!button || button.classList.contains('active')) {
                 return;
             } // update active button state
-            filterControls.querySelector('.filter-btn.active').classList.remove('active');
+            filterControls.querySelector('.btn-filter.active').classList.remove('active');
             button.classList.add('active');
             const filterValue = button.dataset.filter;
             const gridRect = projectsGrid.getBoundingClientRect();
