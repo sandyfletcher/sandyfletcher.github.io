@@ -23,26 +23,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
     }
-    // progressive bio reveal — about page
-    const revealTrigger = document.getElementById('bio-reveal-trigger');
-    if (revealTrigger) {
-        revealTrigger.addEventListener('click', function() {
-            // find first bio section that is currently still hidden
-            const nextSection = document.querySelector('.bio-section:not(.is-revealed)');
-            if (nextSection) {
-                nextSection.classList.add('is-revealed'); // reveal it by adding class that triggers CSS transition
-            } // after revealing a section, check if there are any hidden sections remaining
-            const moreSectionsExist = document.querySelector('.bio-section:not(.is-revealed)'); 
-            if (!moreSectionsExist) { // if no more hidden sections found, hide button
-                const buttonContainer = this.parentElement;
-                buttonContainer.style.transition = 'opacity 0.5s ease';
-                buttonContainer.style.opacity = '0';
-                buttonContainer.addEventListener('transitionend', () => {
-                    buttonContainer.style.display = 'none';
-                }, { once: true });
-            }
-        });
-    }
     // project filtering — building page
     const filterControls = document.querySelector('.filter-controls');
     if (filterControls) {

@@ -370,51 +370,18 @@ a:hover {
 
 /*  ABOUT */
 
-.progressive-bio {
+.about-content {
     max-width: 800px;
     margin: 2rem auto;
     animation: fadeIn 0.8s ease-out;
 }
-.bio-section {
-    transition: opacity 0.5s ease-out, transform 0.4s ease-out, max-height 0.5s ease-out, margin-top 0.4s ease-out;
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(15px);
-    overflow: hidden;
-    margin-top: 0;
-}
-.bio-section.is-revealed {
-    max-height: 1000px;
-    opacity: 1;
-    transform: translateY(0);
-    margin-top: 2.5rem;
-}
-.progressive-bio .bio-section:first-child {
-    margin-top: 0; /* first section doesn't need top margin */
-}
-.bio-section p {
+.about-content p {
     font-size: clamp(1rem, 2.5vw, 1.2rem);
     line-height: 1.7;
     opacity: 0.85;
 }
-.bio-section a { color: var(--color-link-article); }
-.bio-section a:hover { color: var(--color-link-article-hover); }
-.reveal-control {
-    margin-top: 1rem;
-    padding-left: 50%;
-}
-#bio-reveal-trigger {
-    font-family: var(--font-display);
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-    color: var(--color-text);
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-#bio-reveal-trigger:hover { opacity: 1; }
+.about-content a { color: var(--color-link-article); }
+.about-content a:hover { color: var(--color-link-article-hover); }
 
 /* BUILDING */
 
