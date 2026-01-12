@@ -27,7 +27,33 @@ document.addEventListener("DOMContentLoaded", function() {
     const filterControls = document.querySelector('.filter-controls');
     if (filterControls) {
         const projectCards = document.querySelectorAll('.project-card');
-        const projectsGrid = document.querySelector('.projects-grid'); 
+        const projectsGrid = document.querySelector('.projects-grid');
+        const noResultsMessage = document.querySelector('.no-results-message');
+
+        // --- NEW: Function to generate tags on cards ---
+        function generateCardTags() {
+            projectCards.forEach(card => {
+                const tags = card.dataset.tags.split(' ').filter(tag => tag !== 'all'); // Don't show the 'all' tag
+                const tagsContainer = document.createElement('div');
+                tagsContainer.className = 'project-tags';
+                
+                tags.forEach(tagText => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'tag';
+                    tagElement.textContent = tagText;
+                    tagsContainer.appendChild(tagElement);
+                });
+
+                // Insert the tags container before the project links
+                const linksContainer = card.querySelector('.project-links');
+                if (linksContainer) {
+                    linksContainer.parentNode.insertBefore(tagsContainer, linksContainer);
+                }
+            });
+        }
+        // Run the function on page load
+        generateCardTags();
+
         filterControls.addEventListener('click', function(e) {
             const button = e.target.closest('.btn-filter');
             if (!button || button.classList.contains('active')) {
@@ -54,6 +80,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     cardsToHide.push(card);
                 }
             });
+            // --- NEW: Show or hide the no-results message ---
+            if (noResultsMessage) {
+                noResultsMessage.style.display = cardsToShow.length === 0 ? 'block' : 'none';
+            }
             cardsToHide.forEach(card => {
                 const initialPos = initialPositions.get(card);
                 card.style.position = 'absolute';
@@ -94,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
-
+    
     // Image Gallery Logic - for the /gallery/ page
     const galleryContainer = document.querySelector('.gallery-container');
     if (galleryContainer) {

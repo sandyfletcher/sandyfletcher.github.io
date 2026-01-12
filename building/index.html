@@ -24,6 +24,9 @@
                     <button class="btn btn-filter" data-filter="ai">AI</button>
                 </div>
                 <section class="projects-grid">
+                    <div class="no-results-message" style="display: none;">
+                        <p>No projects match the selected filter.</p>
+                    </div>
                     <article class="project-card" data-tags="all web games ai" style="background-image: url('https://picsum.photos/seed/devolver/800/533'); /* background-image: url('/assets/images/projects/devolver.jpg'); */">
                         <div class="project-thumbnail-container">
                             <img src="https://placehold.co/600x400/transparent/ffffff?text=Devolver" alt="Devolver Project Thumbnail" class="project-thumbnail">
@@ -33,6 +36,7 @@
                                 <h2>ASK?LATER</h2>
                                 <p class="project-description">Learned a bit about game design while developing a partially procedurally-generated world.  It's difficult to grant players the freedom to learn game mechanics on their own and also expect them to discover each interaction you spent time creating.</p>
                             </div>
+                            <!-- Tags will be dynamically inserted here by JS -->
                             <div class="project-links">
                                 <a href="./devolver.html" class="project-link">Writeup →</a>
                                 <a href="https://devolver.sandyfletcher.ca" class="project-link" target="_blank" rel="noopener noreferrer">Project →</a>

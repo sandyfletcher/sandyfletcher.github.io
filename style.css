@@ -390,7 +390,8 @@ a:hover {
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 .projects-grid {
     display: grid;
@@ -492,6 +493,12 @@ a:hover {
 .project-link:hover {
     opacity: 1;
     transform: translateX(5px);
+}
+.no-results-message {
+    grid-column: 1 / -1; /* Make it span the full grid width */
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-text-muted);
 }
 
 /* CONTACT */
@@ -795,6 +802,9 @@ a:hover {
     .icon-image {
         width: 1.3rem;
         height: 1.3rem;
+    }
+    .filter-controls {
+        gap: 0.5rem;
     }
     .project-intro {
         font-size: clamp(1.1rem, 4vw, 1.4rem); /* responsive intro paragraph */
