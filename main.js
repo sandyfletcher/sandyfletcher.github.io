@@ -124,7 +124,119 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         });
     }
-    
+
+    // --- BACKGROUND: FLOATING SYMBOLS WITH EVASION ---
+    const canvas = document.getElementById('bg-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        
+        // Config
+        const particleCount = 200; // Total symbols
+        const chars = ['0', '1', '{', '}', '<', '>', '/', ';', '*', '+', '?', '!'];
+        const mouseRadius = 120; // How close the mouse gets before they flee
+        const pushForce = 3; // How fast they run away
+        
+        // Mouse/Touch State
+        let mouse = { x: -1000, y: -1000 }; // Start off-screen
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        
+        // Listeners for Mouse and Touch
+        window.addEventListener('resize', () => { resize(); initParticles(); });
+        
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // Touch support for mobile dragging
+        document.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                mouse.x = e.touches[0].clientX;
+                mouse.y = e.touches[0].clientY;
+            }
+        });
+
+        // Reset mouse when leaving window so symbols stop fleeing from the edge
+        document.addEventListener('touchend', () => { mouse.x = -1000; mouse.y = -1000; });
+        document.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                // Very slow natural drift
+                this.vx = (Math.random() - 0.5) * 0.5; 
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.floor(Math.random() * 14) + 12; // 12px - 26px
+                this.char = chars[Math.floor(Math.random() * chars.length)];
+                // Assign a consistent faint opacity per particle
+                this.alpha = (Math.random() * 0.3) + 0.1; // Between 0.1 and 0.4
+            }
+
+            update() {
+                // 1. Calculate Distance to Mouse
+                const dx = this.x - mouse.x;
+                const dy = this.y - mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // 2. Repulsion Logic
+                if (distance < mouseRadius) {
+                    const angle = Math.atan2(dy, dx);
+                    // The closer the mouse, the stronger the push
+                    const force = (mouseRadius - distance) / mouseRadius; 
+                    const pushX = Math.cos(angle) * pushForce * force * 5; 
+                    const pushY = Math.sin(angle) * pushForce * force * 5;
+                    
+                    this.x += pushX;
+                    this.y += pushY;
+                }
+
+                // 3. Natural Movement
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // 4. Wrap around screen (Pac-man style) 
+                // Using wrap instead of bounce feels more "data stream" like
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.font = `${this.size}px monospace`;
+                ctx.fillText(this.char, this.x, this.y);
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        resize();
+        initParticles();
+        animate();
+    }
+
     // Image Gallery Logic - for the /gallery/ page
     const galleryContainer = document.querySelector('.gallery-container');
     if (galleryContainer) {
